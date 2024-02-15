@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import './UserLogin.css'
 import { IoIosLock } from "react-icons/io";
 
 function UserLogin() {
 
+const [userName,setuserName]= useState()
+const[password,setpassword]=useState()
 
+const handleSubmit=async(e)=>{
+  e.preventDefault()
+  const body={userName,password}
+  //api call for fetch userlogin
+  console.log(body);
+}
 
 
   return (
@@ -17,14 +25,14 @@ function UserLogin() {
 
 
       <div className='wrapper'>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <h1>User Login</h1>
           <div className='input-box'>
-            <input type="text" placeholder='username' required />
+            <input type="text" placeholder='username' onChange={(e)=>setuserName(e.target.value)} required />
             <FaUser  className='icon'/>
           </div>
           <div className='input-box'>
-            <input type="password" placeholder='password' required />
+            <input type="password" placeholder='password' onChange={(e)=>setpassword(e.target.value)} required />
             <IoIosLock  className='icon'/>
           </div>
           <div className='remember-forgot'>
