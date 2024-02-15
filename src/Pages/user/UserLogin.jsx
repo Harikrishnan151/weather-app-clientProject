@@ -10,9 +10,6 @@ function UserLogin() {
 
   return (
     // design login page
-
-
-
     <div className='userlogin'>
 
 

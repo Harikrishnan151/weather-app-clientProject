@@ -1,12 +1,14 @@
 import axios from 'axios'
 
+
+
 //basic structure for all API
 export const commonRequest=async(method,url,body,header)=>{
 
     let config={
         method,
         url,
-       headers:header?header:"application/json",
+       headers:header?header:"application/json" ,
        data:body
 
     }
