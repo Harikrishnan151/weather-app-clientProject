@@ -12,7 +12,7 @@ import {
 function Footer() {
   return (
     <div>
-          <MDBFooter className='text-center text-white' style={{ backgroundColor: '#f1f1f1' }}>
+          <MDBFooter className='text-center text-white' style={{ backgroundColor: '#bb8fce' }}>
       <MDBContainer className='pt-4'>
         <section className='mb-4'>
           <MDBBtn
@@ -24,7 +24,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fab fa-facebook-f' />
+            <MDBIcon style={{color:'white'}} fab className='fab fa-facebook-f' />
           </MDBBtn>
 
           <MDBBtn
@@ -36,7 +36,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fa-twitter' />
+            <MDBIcon style={{color:'white'}} fab className='fa-twitter' />
           </MDBBtn>
 
           <MDBBtn
@@ -48,7 +48,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fa-google' />
+            <MDBIcon style={{color:'white'}} fab className='fa-google' />
           </MDBBtn>
 
           <MDBBtn
@@ -60,7 +60,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fa-instagram' />
+            <MDBIcon style={{color:'white'}} fab className='fa-instagram' />
           </MDBBtn>
 
           <MDBBtn
@@ -72,7 +72,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fa-linkedin' />
+            <MDBIcon style={{color:'white'}} fab className='fa-linkedin' />
           </MDBBtn>
 
           <MDBBtn
@@ -84,15 +84,15 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon fab className='fa-github' />
+            <MDBIcon style={{color:'white'}} fab className='fa-github' />
           </MDBBtn>
         </section>
       </MDBContainer>
 
-      <div className='text-center text-dark p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2020 Copyright:
-        <a className='text-dark' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+      <div className='text-center text-light p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+        © 2024 Copyright:
+        <a className='text-light' href='https://mdbootstrap.com/'>
+          weather-app.com
         </a>
       </div>
     </MDBFooter>
