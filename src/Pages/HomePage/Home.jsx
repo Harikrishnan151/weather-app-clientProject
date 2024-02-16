@@ -45,10 +45,6 @@ function Home() {
   }
   
   return (
-<<<<<<< HEAD
-    
-    <div>Home</div>
-=======
 
     <div className='body'>
 
@@ -108,7 +104,6 @@ function Home() {
 
 
 
->>>>>>> origin/master
   )
 }
 

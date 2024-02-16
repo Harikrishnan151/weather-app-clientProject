@@ -23,6 +23,7 @@ function Header() {
   const isUserLoginPage = useLocation().pathname === '/userLogin'
   const isAdminLoginPage = useLocation().pathname === '/adminLogin' 
   const isUserRegisterPage =useLocation().pathname==='/userRegister'
+  const isHomePage =useLocation().pathname==='/'
 
 
   const [click, setClick] = useState(false)
@@ -65,7 +66,7 @@ function Header() {
                 <MDBDropdownMenu>
 
 {
-  isUserLoginPage || isAdminLoginPage || isUserRegisterPage ? <div>
+  isUserLoginPage || isAdminLoginPage || isUserRegisterPage || isHomePage ? <div>
     <MDBDropdownItem link><Link to={"/adminLogin"}>Admin <MdAdminPanelSettings /></Link></MDBDropdownItem>
                   <MDBDropdownItem link><Link to={"/userLogin"}>User <FaUser /></Link></MDBDropdownItem>
   </div> :
