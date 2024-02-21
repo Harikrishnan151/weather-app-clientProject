@@ -5,6 +5,8 @@ import { FaWind } from "react-icons/fa";
 import { FaWater } from "react-icons/fa6";
 import './Home.css'
 import axios from 'axios';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 function Home() {
 
@@ -45,8 +47,12 @@ function Home() {
   }
   
   return (
+<>
 
-    <div className='body'>
+<Header/>
+
+
+    <div className='body '>
 
       <div className='homePage'>
         <div className='search-box'>
@@ -101,8 +107,9 @@ function Home() {
 
       </div>
     </div>
+   
 
-
+    </>
 
   )
 }
