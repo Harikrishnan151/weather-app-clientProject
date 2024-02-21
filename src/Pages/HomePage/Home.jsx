@@ -9,7 +9,7 @@ import axios from 'axios';
 function Home() {
 
   // const [currentWeather, setCurrentWeather] = useState(null);
-  // const [locationWeather, setLocationWeather] = useState(null);
+  const [locationWeather, setLocationWeather] = useState(null);
   const [currentLocation, setCurrentLocation] = useState({});
   const [givenLocation, setGivenLocation] = useState('');
   
@@ -45,10 +45,6 @@ function Home() {
   }
   
   return (
-<<<<<<< HEAD
-    
-    <div>Home</div>
-=======
 
     <div className='body'>
 
@@ -108,7 +104,6 @@ function Home() {
 
 
 
->>>>>>> origin/master
   )
 }
 
