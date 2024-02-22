@@ -10,6 +10,7 @@ import Emergency from './Pages/emergency/Emergency';
 import Landingpage from './Pages/UserLandingpage/Landingpage';
 import UserEmergency from './userEmergency/userEmergency';
 import DashboardUser from './Pages/userDashboard/DashboardUser';
+import AddPosts from './Pages/addPost/AddPosts';
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/home' element={<Landingpage/>}/>
         <Route path='/userEmergency' element={<UserEmergency/>}/>
         <Route path='/userDashboard' element={<DashboardUser/>}/>
+        <Route path='/addPost' element={<AddPosts/>}/>
         
       </Routes>
       
