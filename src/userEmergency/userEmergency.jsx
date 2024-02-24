@@ -19,11 +19,12 @@ function userEmergency() {
     <div>
         <Navbar/>
     <div className='maindiv '>
-    
-    <Row className='p-4'>
+      <h1 className='title py-3' >Emergency</h1>
+      
+    <Row className='p-5'>
       {
 
-        <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
+        <Col sm={12} md={6} lg={4} xl={3} className='py-4'>
 
           <Link to={`view/`} style={{ textDecoration: 'none' }}>
             <MDBCard className='card '>
@@ -42,9 +43,11 @@ function userEmergency() {
       }
 
     </Row>
-    <Footer />
+   
+    
 
   </div>
+  <Footer />
   </div>
   )
 }

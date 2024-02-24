@@ -11,6 +11,7 @@ import Landingpage from './Pages/UserLandingpage/Landingpage';
 import UserEmergency from './userEmergency/userEmergency';
 import DashboardUser from './Pages/userDashboard/DashboardUser';
 import AddPosts from './Pages/addPost/AddPosts';
+import EditPost from './Pages/editPost/EditPost';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/userEmergency' element={<UserEmergency/>}/>
         <Route path='/userDashboard' element={<DashboardUser/>}/>
         <Route path='/addPost' element={<AddPosts/>}/>
+        <Route path='/editPost' element={<EditPost/>}/>
         
       </Routes>
       

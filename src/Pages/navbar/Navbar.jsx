@@ -29,7 +29,7 @@ function Navbar() {
     <MDBNavbar expand='lg' className='navbar'>
       <MDBContainer fluid>
         <Link to={'/home'}>
-        <MDBNavbarBrand  className='text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
         </Link>
         <MDBNavbarToggler style={{color:'white'}}
           type='button'

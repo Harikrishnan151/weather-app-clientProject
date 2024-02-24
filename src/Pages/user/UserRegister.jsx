@@ -4,7 +4,6 @@ import { FaUser } from "react-icons/fa";
 import './UserRegister.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from '../navbar/Navbar';
 function UserRegister() {
 
   const [userData, setUserData] = useState({
@@ -39,7 +38,7 @@ function UserRegister() {
 
     }
     else {
-      toast.error("Enter same pass word")
+      toast.error("Enter same password")
     }
 
   }
@@ -50,7 +49,7 @@ function UserRegister() {
   return (
     // user register form
     <>
-      <Navbar />
+      
       <div className='userRegister'>
         <div className='wrapper'>
 

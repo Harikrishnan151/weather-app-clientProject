@@ -12,7 +12,7 @@ import {
 function Footer() {
   return (
     <div>
-          <MDBFooter className='text-center text-white' style={{ backgroundColor: '#bb8fce' }}>
+          <MDBFooter className='text-center text-white' style={{ backgroundColor: 'black' }}>
       <MDBContainer className='pt-4'>
         <section className='mb-4'>
           <MDBBtn
@@ -20,7 +20,7 @@ function Footer() {
             color='link'
             floating
             size="lg"
-            className='text-dark m-1'
+            className='text-light m-1'
             href='#!'
             role='button'
           >
@@ -32,7 +32,7 @@ function Footer() {
             color='link'
             floating
             size="lg"
-            className='text-dark m-1'
+            className='text-light m-1'
             href='#!'
             role='button'
           >
@@ -44,7 +44,7 @@ function Footer() {
             color='link'
             floating
             size="lg"
-            className='text-dark m-1'
+            className='text-light m-1'
             href='#!'
             role='button'
           >

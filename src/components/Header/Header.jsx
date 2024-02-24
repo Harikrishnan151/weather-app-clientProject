@@ -28,7 +28,7 @@ function Header() {
     <div>
        <MDBNavbar expand='lg' className='navbar'>
       <MDBContainer fluid>
-        <MDBNavbarBrand  className='text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
         <MDBNavbarToggler style={{color:'white'}}
           type='button'
           aria-expanded='false'
@@ -58,14 +58,14 @@ function Header() {
               </Link>
                 </MDBDropdownToggle  >
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link><Link to={'/userLogin'}>
+                <Link to={'/userLogin'}>
+                  <MDBDropdownItem link>
                   User
-                  </Link>
-                    </MDBDropdownItem>
-                  <MDBDropdownItem link><Link to={'/adminLogin'}>
+                 </MDBDropdownItem></Link>
+                 <Link to={'/adminLogin'}> <MDBDropdownItem link>
                   Admin
-                  </Link></MDBDropdownItem>
-                  
+                  </MDBDropdownItem>
+                  </Link>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

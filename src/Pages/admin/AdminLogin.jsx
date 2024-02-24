@@ -44,16 +44,16 @@ function AdminLogin() {
           <input type="password" placeholder='password' required onChange={(e)=>setPassword(e.target.value)} />
           <IoIosLock  className='icon'/>
         </div>
-        <div className='remember-forgot'>
+        {/* <div className='remember-forgot'>
           <label><input type="checkbox" />Remember Me?</label>
           <a href="">Forgot Password ?</a>
 
           
-        </div>
+        </div> */}
         <button type='submit'>Login</button>
-        <div className='register-link'>
+        {/* <div className='register-link'>
           <p>Don't have any account ? <a href="/userRegister">Register</a></p>
-        </div>
+        </div> */}
 
 
       </form>
