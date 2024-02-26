@@ -28,7 +28,9 @@ function Navbar() {
   <>
     <MDBNavbar expand='lg' className='navbar'>
       <MDBContainer fluid>
-        <MDBNavbarBrand  className='text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        <Link to={'/home'}>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        </Link>
         <MDBNavbarToggler style={{color:'white'}}
           type='button'
           aria-expanded='false'
@@ -46,7 +48,7 @@ function Navbar() {
             </MDBNavbarItem>
             <MDBNavbarItem className='me-4'>
               <MDBNavbarLink href='#'> 
-              <Link style={{ color: 'white',fontSize:'23px' }}>
+              <Link to={"/allPost"} style={{ color: 'white',fontSize:'23px' }}>
               <IoMdPhotos />
               </Link> </MDBNavbarLink>
             </MDBNavbarItem>
@@ -57,7 +59,7 @@ function Navbar() {
             </MDBNavbarItem>
             <MDBNavbarItem className='me-4'>
               <MDBNavbarLink href='#'> 
-              <Link style={{ color: 'white',fontSize:'22px' }}>
+              <Link to={'/userDashboard'} style={{ color: 'white',fontSize:'22px' }}>
               <FaUserCircle />
               </Link> </MDBNavbarLink>
             </MDBNavbarItem>

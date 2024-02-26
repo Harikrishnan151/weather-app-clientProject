@@ -18,10 +18,13 @@ function Emergency() {
   return (
     <div className='maindiv '>
       <Header />
+      <div>
+      <h1 className='title py-2' >Emergency</h1>
+      
       <Row className='p-4'>
         {
 
-          <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
+          <Col sm={12} md={6} lg={4} xl={3} className='py-2 '>
 
             <Link to={`view/`} style={{ textDecoration: 'none' }}>
               <MDBCard className='card mt-5'>
@@ -40,6 +43,7 @@ function Emergency() {
         }
 
       </Row>
+      </div>
       <Footer />
 
     </div>

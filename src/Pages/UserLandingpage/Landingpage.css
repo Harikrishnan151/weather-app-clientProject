@@ -5,8 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: url('https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg?cs=srgb&dl=pexels-pixabay-209831.jpg&fm=jpg');
+    min-height: 95vh;
+    background: url('https://images.hdqwalls.com/download/stars-planets-4k-b1-1920x1080.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -22,14 +22,11 @@
     backdrop-filter: blur( 30px);
     box-shadow: 0 0 10px rgba(225,225,225,.2);
 
-
-
-
 }
 .search-box{
     position: relative;
     width: 100%;
-    height: 55px;
+    height: 50px;
     /* background: slateblue; */
     display: flex;
     align-items: center;
