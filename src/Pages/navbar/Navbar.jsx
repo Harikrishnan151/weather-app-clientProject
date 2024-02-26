@@ -48,7 +48,7 @@ function Navbar() {
             </MDBNavbarItem>
             <MDBNavbarItem className='me-4'>
               <MDBNavbarLink href='#'> 
-              <Link style={{ color: 'white',fontSize:'23px' }}>
+              <Link to={"/allPost"} style={{ color: 'white',fontSize:'23px' }}>
               <IoMdPhotos />
               </Link> </MDBNavbarLink>
             </MDBNavbarItem>

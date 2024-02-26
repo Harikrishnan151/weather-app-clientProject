@@ -12,6 +12,7 @@ import UserEmergency from './userEmergency/userEmergency';
 import DashboardUser from './Pages/userDashboard/DashboardUser';
 import AddPosts from './Pages/addPost/AddPosts';
 import EditPost from './Pages/editPost/EditPost';
+import AllPost from './Pages/allpost/AllPost';
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/userDashboard' element={<DashboardUser/>}/>
         <Route path='/addPost' element={<AddPosts/>}/>
         <Route path='/editPost' element={<EditPost/>}/>
+        <Route path='/allPost' element={<AllPost/>}/>
         
       </Routes>
       
