@@ -15,6 +15,7 @@ import Navbar from '../Pages/navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 
 function userEmergency() {
+
   return (
     <div>
         <Navbar/>

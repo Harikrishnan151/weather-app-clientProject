@@ -5,23 +5,26 @@ import { IoIosLock } from "react-icons/io";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { adminLogin } from '../../services/allApi';
+
 function AdminLogin() {
 
-    const [userName,setUserName]=useState()
+    const [username,setUserName]=useState()
     const [password,setPassword]=useState()
     const navigate=useNavigate()
 
     //function to admin login
     const handleSubmit=async(e)=>{
         e.preventDefault();
-       const body={userName,password}
+       const body={username,password}
        // Check if any of the fields are empty
-       if(!userName || !password){
+       if(!username || !password){
         toast.error('Please fill the feilds')
        }else{
         //api call for admin login
+        const response=await adminLogin(body)
         // navigate('/')
-        console.log(userName,password);
+        console.log(username,password);
         toast.success('Login Success')
        }
        
@@ -37,7 +40,7 @@ function AdminLogin() {
       <form onSubmit={handleSubmit}>
         <h1>Admin Login</h1>
         <div className='input-box'>
-          <input type="text" placeholder='username' required  onChange={(e)=>setUserName(e.target.value)}/>
+          <input type="text" placeholder='username'  required  onChange={(e)=>setUserName(e.target.value)}/>
           <FaUser  className='icon'/>
         </div>
         <div className='input-box'>

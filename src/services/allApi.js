@@ -1,8 +1,6 @@
 
-
-
 import BASE_URL from "./baseurl"
-import { commonRequest } from "./CommonReq"
+import { commonRequest } from "./commonReq"
 
 
 //get assembli description
@@ -13,3 +11,8 @@ import { commonRequest } from "./CommonReq"
 // export const getbus=async(userData)=>{
 //     return commonRequest("POST",`${BASE_URL}/busbooking/getbusdetails`,userData)
 // }
+
+// / admin login
+export const adminLogin=async(userdata)=>{
+    return commonRequest("POST",`${BASE_URL}superuser-login/`,userdata)
+}
