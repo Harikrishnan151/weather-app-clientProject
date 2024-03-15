@@ -14,21 +14,51 @@ function AdminLogin() {
     const navigate=useNavigate()
 
     //function to admin login
+    // const handleSubmit=async(e)=>{
+    //     e.preventDefault();
+    //    const body={username,password}
+    //    // Check if any of the fields are empty
+    //    if(!username || !password){
+    //     toast.error('Please fill the feilds')
+    //    }else{
+    //     //api call for admin login
+    //     const response=await adminLogin(body)
+    //     navigate('')
+    //     console.log(username,password);
+    //     toast.success('Login Success')
+    //    }
+       
+    // }
+    //function for admin login
     const handleSubmit=async(e)=>{
-        e.preventDefault();
-       const body={username,password}
-       // Check if any of the fields are empty
-       if(!username || !password){
+      e.preventDefault();
+      const body={username,password}
+      console.log(body);
+      try {
+        if(!username || !password){
         toast.error('Please fill the feilds')
-       }else{
+      }else{
         //api call for admin login
         const response=await adminLogin(body)
-        // navigate('/')
-        console.log(username,password);
-        toast.success('Login Success')
-       }
-       
+        if(response.status===200){
+          localStorage.setItem("token",response.data.token)
+          toast.success('Login Success') 
+          setTimeout(()=>{
+            navigate('/adminDashboard')
+          },3000)
+        }else if(response.status==401){
+          toast.error('Invalid username or password')
+        }else{
+          toast.error('Account does not exist')
+        }
+      }
+        
+      } catch (error) {
+        console.error(error);
+        toast.error('Internal server error')
+      }
     }
+
 
 
   return (
@@ -39,20 +69,14 @@ function AdminLogin() {
     <div className='wrapper'>
       <form onSubmit={handleSubmit}>
         <h1>Admin Login</h1>
-        <div className='input-box'>
+        <div className='input-box3'>
           <input type="text" placeholder='username'  required  onChange={(e)=>setUserName(e.target.value)}/>
           <FaUser  className='icon'/>
         </div>
-        <div className='input-box'>
+        <div className='input-box3'>
           <input type="password" placeholder='password' required onChange={(e)=>setPassword(e.target.value)} />
           <IoIosLock  className='icon'/>
         </div>
-        {/* <div className='remember-forgot'>
-          <label><input type="checkbox" />Remember Me?</label>
-          <a href="">Forgot Password ?</a>
-
-          
-        </div> */}
         <button type='submit'>Login</button>
         {/* <div className='register-link'>
           <p>Don't have any account ? <a href="/userRegister">Register</a></p>

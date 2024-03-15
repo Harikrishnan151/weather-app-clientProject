@@ -34,7 +34,7 @@ box-sizing:border-box;
     text-align: center;
     
 }
-.wrapper .input-box{
+.wrapper .input-box4{
     position: relative;
     width: 100%;
     height: 50px;
@@ -42,7 +42,7 @@ box-sizing:border-box;
     
 
 }
-.input-box input{
+.input-box4 input{
     width: 100%;
     height: 100%;
     background: transparent;
@@ -55,12 +55,12 @@ box-sizing:border-box;
 
 
 }
-.input-box input::placeholder{
+.input-box4 input::placeholder{
     color: white;
 
     
 }
-.input-box .icon{
+.input-box4 .icon{
     position: absolute;
     right: 20px;
     top: 50%;

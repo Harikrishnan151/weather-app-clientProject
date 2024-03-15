@@ -3,21 +3,44 @@ import { FaUser } from "react-icons/fa";
 import './UserLogin.css'
 import { IoIosLock } from "react-icons/io";
 import Header from '../../components/Header/Header';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { userLogin } from '../../services/allApi';
+import { useNavigate } from 'react-router-dom';
 
 function UserLogin() {
 
-const [userName,setuserName]= useState()
+const [username,setuserName]= useState()
 const[password,setpassword]=useState()
+ const navigate=useNavigate()
 
 const handleSubmit=async(e)=>{
 
   e.preventDefault()
-  const body={userName,password}
-
-  //api call for fetch userlogin
-  
-  console.log(body);
-
+  const body={username,password}
+  console.log(username,password);
+  try{
+    if(!username || !password){
+      toast.error('Please fill the feilds')
+     }else{
+      //api call for admin login
+      const response=await userLogin(body)
+      console.log(response);
+       if(response.status==200){
+        localStorage.setItem("token",response.data.access) 
+       alert('Login Success')
+        navigate('/home')
+       }else if(response.status==401){
+        alert('invalid usernane or password')
+       }else{
+        alert('Account does not exist')
+       }
+      
+     }
+  }catch(error){
+    console.error(error);
+    toast.error('Internal server error')
+  }
 }
 
 
@@ -29,11 +52,11 @@ const handleSubmit=async(e)=>{
       <div className='wrapper'>
         <form onSubmit={handleSubmit}>
           <h1>User Login</h1>
-          <div className='input-box'>
+          <div className='input-box4'>
             <input type="text" placeholder='username' onChange={(e)=>setuserName(e.target.value)} required />
             <FaUser  className='icon'/>
           </div>
-          <div className='input-box'>
+          <div className='input-box4'>
             <input type="password" placeholder='password' onChange={(e)=>setpassword(e.target.value)} required />
             <IoIosLock  className='icon'/>
           </div>
@@ -54,6 +77,7 @@ const handleSubmit=async(e)=>{
       </div>
 
 
+      <ToastContainer position='top-center' />
     </div>
 
 
