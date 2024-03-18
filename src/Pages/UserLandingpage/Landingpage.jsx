@@ -7,26 +7,16 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaWind } from "react-icons/fa";
 import { FaWater } from "react-icons/fa6";
 import Footer from '../../components/Footer/Footer';
+import { getWeather } from '../../services/allApi';
 
 function Landingpage() {
 
-  // const [currentWeather, setCurrentWeather] = useState(null);
-  // const [locationWeather, setLocationWeather] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState({});
   const [givenLocation, setGivenLocation] = useState('');
+  const [weather, setWeather] = useState({})
+  const [items, setItems] = useState([])
+  const [dataFetched, setDataFetched] = useState(false)
 
 
-
-  useEffect(() => {
-    // Fetch weather for current location on component mount
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      const { latitude, longitude } = position.coords;
-      // console.log(latitude);
-      setCurrentLocation({ latitude, longitude });
-      fetchWeather(latitude, longitude, 'current'); // fuction call to api fetch using current location
-    });
-  }, []);
 
   // api fetch function for weather search
   const fetchWeather = (latitude, longitude, type) => {
@@ -41,9 +31,22 @@ function Landingpage() {
   }
 
   // function to pass given location to get weather data
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(givenLocation);
-    fetchWeather(null, null, 'given')  // function to fetch by given position
+    try {
+      const response = await getWeather(givenLocation)
+      console.log(response.data.weather);
+      console.log(response.data.necessary_items);
+      setWeather(response.data.weather)
+      setItems(response.data.necessary_items)
+      setDataFetched(true)
+
+    } catch (error) {
+      alert('Faild to fetch weather')
+    }
+    console.log(weather);
+
+
   }
   return (
     <>
@@ -51,60 +54,76 @@ function Landingpage() {
 
       <div className='body '>
 
-        <div className='homePage '>
-          <div className='search-box'>
-            <FaLocationDot className='icons' />
-            <input type="text" placeholder='Enter Location' onChange={(e) => setGivenLocation(e.target.value)} />
-            <button onClick={handleSubmit} ><FaSearchLocation /></button>
+<div className='homePage'>
+  <div className='search-box'>
+    <FaLocationDot className='icons' />
+    <input type="text" placeholder='Enter Location' onChange={(e) => setGivenLocation(e.target.value)} />
+    <button onClick={handleSubmit} ><FaSearchLocation /></button>
+  </div>
+
+  <div>
+    {
+      dataFetched ?
+      <div className='weather-box'>
+      <div className='box'>
+        <div className='info-weather'>
+          <div className='weather'>
+            <img src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
+            <p className='city'>{weather.city}</p>
+            <p className='temparature'>{weather.temperature} <span> ℃</span></p>
+            <p className='description'>{weather.description}</p>
           </div>
+          <div className='humidity'>
 
-          <div className='weather-box'>
-            <div className='box'>
-              <div className='info-weather'>
-                <div className='weather'>
-                  <img src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
-                  <p className='temparature'>16 <span> ℃</span></p>
-                  <p className='description'>Broken Clouds</p>
-
-                </div>
-
+            <div className='text'>
+              <div className='info-humidity'>
+                <span><FaWater className='icons' /> {weather.humidity} Humidity</span>
               </div>
-
-            </div>
-
-          </div>
-
-
-          {/* weather details */}
-          <div className='weather-details '>
-            {/* humidity */}
-            <div className='humidity'>
-              <FaWater className='icons' />
-              <div className='text'>
-                <div className='info-humidity'>
-                  <span>0%</span>
+              <div className="container my-3">
+                <div className="row">
+                  <h4>Suggested to take</h4>
+                  <div className="col">
+                    {
+                      items.map((item, index) => (
+                        <span className='items' key={index}>{item}</span>
+                      ))
+                    }
+                  </div>
                 </div>
-                <p>Humidity</p>
+                <div className='text-center my-2 '>
+                  <button className='btn btn-primary'>Live Forecast</button>
               </div>
-            </div>
-
-            {/* wind  */}
-            <div className='wind'>
-              <FaWind className='icons' />
-              <div className='text'>
-                <div className='info-wind'>
-                  <span>0%</span>
-                </div>
-                <p>Humidity</p>
+                
               </div>
             </div>
-
           </div>
-
 
         </div>
+
       </div>
-      <Footer/>
+
+    </div>
+    :
+    <div className='weather-box'>
+     <img width={60} src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
+     <div>
+      <h5 className='content'>Introducing our weather app, your ultimate companion for both emergencies and daily forecasts. Stay ahead with real-time updates, detailed hourly forecasts.</h5>
+     </div>
+  </div>
+    }
+
+
+
+
+  </div>
+
+
+
+</div>
+</div>
+<Footer />
+
+
 
     </>
   )

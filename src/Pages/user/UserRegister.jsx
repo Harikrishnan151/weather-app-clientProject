@@ -4,45 +4,65 @@ import { FaUser } from "react-icons/fa";
 import './UserRegister.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { userReg } from '../../services/allApi';
+import { useNavigate } from 'react-router-dom';
 function UserRegister() {
 
-  const [userData, setUserData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    psw: "",
-    // Cpsw:""
-  })
-
+  
+  const [username,setUsername]=useState()
+  const [email,setEmail]=useState()
+  const [first_name,setFirstname]=useState()
+  const [last_name,setLastname]=useState()
+  const [password,setpassword]=useState()
 
   const [confirmPwd, setConfirmpsw] = useState()
+  const navigate=useNavigate()
 
-  //data store registration
-  const handleChange = (e) => {
-    e.preventDefault()
+  // // Register data submission
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   const body={firstName,lastName,username,email,password}
+  //   console.log(username,password,email,firstName,lastName);
+  //  try {
+   
+  //     const response=await userReg(body)
+  //     toast.success("Login Successfull")
+  //     console.log(response);
+  //     setTimeout(()=>{
+  //      naviate('/userLogin')
+  //     },3000)
+  
 
-    const { name, value } = e.target
-    setUserData({ ...userData, [name]: value })
+    
+  //  } catch (error) {
+  //   toast.error("Registeration Faild")
+  //  }
 
-  }
-  console.log(userData);
+  // }
 
-  // Register data submission
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (userData.psw == confirmPwd) {
-
-
-      ///Api call for Register
-
-
+    e.preventDefault();
+    const body = { first_name,last_name, username, email, password };
+    console.log(username, password, email, first_name,last_name);
+    try {
+      const response = await userReg(body);
+      console.log(response.response.status);
+      
+      if (response.status === 201) {
+        toast.success(response.status);
+        setTimeout(() => {
+          navigate('/home');
+        }, 3000);
+      }else if(response.response.status === 400 ){
+        toast.error("Account already exist")
+      }else{
+        toast.error("Internal error")
+      }
+    } catch (error) {
+      toast.error("Registration Failed");
+      console.error("Error:", error);
     }
-    else {
-      toast.error("Enter same password")
-    }
-
   }
-
 
 
 
@@ -53,37 +73,41 @@ function UserRegister() {
       <div className='userRegister'>
         <div className='wrapper'>
 
-          <form action="">
+          <form onSubmit={handleSubmit}>
 
             <h1>User Register</h1>
 
-            <div className='input-box'>
-              <input type="text" name='firstname' onChange={e => handleChange(e)} placeholder='FirstName' required />
+            <div className='input-box5'>
+              <input type="text" name='firstname' onChange={(e)=>setFirstname(e.target.value)} placeholder='FirstName' required />
               <FaUser className='icon' />
             </div>
-            <div className='input-box'>
-              <input type="text" name='lastname' onChange={e => handleChange(e)} placeholder='Last Name' required />
+            <div className='input-box5'>
+              <input type="text" name='lastname' onChange={(e) => setLastname(e.target.value)} placeholder='Last Name' required />
               <FaUser className='icon' />
             </div>
-            <div className='input-box'>
-              <input type="text" placeholder='username' onChange={e => handleChange(e)} name='username' required />
+            <div className='input-box5'>
+              <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} name='username' required />
               <FaUser className='icon' />
             </div>
-            <div className='input-box'>
-              <input type="password" placeholder='password' onChange={e => handleChange(e)} name='psw' required />
+            <div className='input-box5'>
+              <input type="email" placeholder='email'onChange={(e) => setEmail(e.target.value)} name='email' required />
               <IoIosLock className='icon' />
             </div>
-            <div className='input-box'>
+            <div className='input-box5'>
+              <input type="password" placeholder='password'onChange={(e) => setpassword(e.target.value)} name='psw' required />
+              <IoIosLock className='icon' />
+            </div>
+            {/* <div className='input-box5'>
               <input type="password" placeholder='confirm password' onChange={(e) => setConfirmpsw(e.target.value)} name='Cpsw' required />
               <IoIosLock className='icon' />
-            </div>
+            </div> */}
             {/* <div className='remember-forgot'> */}
             {/* <label><input type="checkbox" />Remember Me?</label> */}
             {/* <a href="">Forgot Password ?</a> */}
 
 
 
-            <button type='submit' onClick={handleSubmit}>Register</button>
+            <button type='submit' >Register</button>
 
 
           </form>

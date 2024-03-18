@@ -1,7 +1,6 @@
-
 /* design for main div classname:body */
 
-.body{
+.body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,22 +10,20 @@
     background-position: center;
 }
 
-.homePage{
+.homePage {
     position: relative;
     width: 400px;
-    height: 555px;
+    height: 600px;
     /* background: purple; */
     border-radius: 16px;
     padding: 20px;
-    border: 2px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur( 30px);
-    box-shadow: 0 0 10px rgba(225,225,225,.2);
-
-
-
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(225, 225, 225, .2);
 
 }
-.search-box{
+
+.search-box {
     position: relative;
     width: 100%;
     height: 55px;
@@ -34,12 +31,13 @@
     display: flex;
     align-items: center;
 }
-.search-box input{
+
+.search-box input {
     position: absolute;
     width: 100%;
     height: 100%;
     background: transparent;
-    border: 2px solid rgba(255,255,255,.2);
+    border: 2px solid rgba(255, 255, 255, .2);
     outline: none;
     border-radius: 10px;
     font-size: 22px;
@@ -49,10 +47,12 @@
     padding: 0 48px 0 42px;
 
 }
-.search-box input::placeholder{
+
+.search-box input::placeholder {
     color: #ffff;
 }
-.search-box button{
+
+.search-box button {
     position: absolute;
     right: 0;
     width: 40px;
@@ -65,7 +65,8 @@
     padding: 0 40px 0 5px;
     cursor: pointer;
 }
-.search-box .icons{
+
+.search-box .icons {
     position: absolute;
     left: 10px;
     font-size: 25px;
@@ -75,40 +76,51 @@
 
 .weather-box {
     text-align: center;
-    margin: 40px 0;
+    margin: 20px 0;
     color: #ffff;
     padding: 0 30px;
 
 }
 
-.weather-box img{
+.weather-box img {
     width: 60%;
 
 }
 
-.weather-box .temparature{
+.weather-box .temparature {
     position: relative;
     font-size: 64px;
     line-height: 1;
     font-weight: 700;
     color: #ffff;
-    margin: 20px 0 6px -30px;
+    margin: -30px 0 6px -30px;
 
 }
-.weather-box .temparature span{
+
+.weather-box .city {
+    position: relative;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 700;
+    color: #ffff;
+    margin: -20px 0 6px -20px;
+
+}
+
+.weather-box .temparature span {
     position: absolute;
     font-size: 35px;
     margin-left: 4px;
 
 }
 
-.weather-box .description{
+.weather-box .description {
     font-size: 22px;
     font-weight: 500;
     text-transform: capitalize;
 }
 
-.weather-details{
+.weather-details {
     position: absolute;
     bottom: 40px;
     left: 0;
@@ -117,6 +129,7 @@
     display: flex;
     color: #ffff;
 }
+
 .weather-details .humidity,
 .weather-details .wind {
 
@@ -125,29 +138,36 @@
     width: 50%;
 
 }
+
 .weather-details .icons {
     font-size: 50px;
     margin-right: 10px;
 }
+
 .weather-details span {
     display: inline-block;
     font-size: 22px;
     font-weight: 500;
 }
-.weather-details p{
+
+.weather-details p {
     font-size: 14px;
     font-weight: 500;
 }
 
-.weather-details .humidity{
+.weather-details .humidity {
     padding-left: 20px;
     justify-content: flex-start;
 }
-.weather-details .wind{
+
+.weather-details .wind {
     padding-right: 20px;
     justify-content: flex-end;
 }
 
-
-
-
+.col {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+}

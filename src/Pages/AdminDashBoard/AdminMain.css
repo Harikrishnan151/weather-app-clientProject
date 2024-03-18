@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+
+}
+
+
+/* body{
+    background-color: #dde6ed;
+    padding: 10px;
+} */
+
+.dashboard{
+    background-color:#dde6ed;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+flex: 1;
+    
+}
+.dashboard .dashboard-content{
+    background-color: #fff;
+    flex: 1;
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+
+
+
+
+}

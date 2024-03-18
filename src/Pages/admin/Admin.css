@@ -32,7 +32,7 @@
         text-align: center;
         
     }
-    .wrapper .input-box{
+    .wrapper .input-box3{
         position: relative;
         width: 100%;
         height: 50px;
@@ -40,7 +40,7 @@
         
     
     }
-    .input-box input{
+    .input-box3 input{
         width: 100%;
         height: 100%;
         background: transparent;
@@ -53,12 +53,12 @@
     
     
     }
-    .input-box input::placeholder{
+    .input-box3 input::placeholder{
         color: white;
     
         
     }
-    .input-box .icon{
+    .input-box3 .icon{
         position: absolute;
         right: 20px;
         top: 50%;

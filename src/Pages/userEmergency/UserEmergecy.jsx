@@ -1,5 +1,5 @@
 import React from 'react'
-import './userEmergency.css'
+import './UserEmergency.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import {
@@ -11,11 +11,11 @@ import {
   
   } from 'mdb-react-ui-kit';
   import { Link } from 'react-router-dom';
-import Navbar from '../Pages/navbar/Navbar';
-import Footer from '../components/Footer/Footer';
+import Navbar from '../navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
-function userEmergency() {
 
+function UserEmergecy() {
   return (
     <div>
         <Navbar/>
@@ -53,4 +53,4 @@ function userEmergency() {
   )
 }
 
-export default userEmergency
+export default UserEmergecy
