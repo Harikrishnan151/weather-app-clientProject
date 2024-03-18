@@ -1,7 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import { useContext, useState } from 'react'
 import Home from './Pages/HomePage/Home';
 import UserLogin from './Pages/user/UserLogin';
 import UserRegister from './Pages/user/UserRegister';
@@ -16,14 +16,17 @@ import WeatherForecast from './Pages/weatherForecast/WeatherForecast';
 import Forecasting from './Pages/forecasting/Forecasting';
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 import UserEmergecy from './Pages/userEmergency/UserEmergecy';
+// import { AuthContextStatus } from './Pages/AuthContext';
 
 
 
 function App() {
+  // const {authorizsed} = useContext(AuthContextStatus)
   return (
     <div className="App">
      
       <Routes>
+        
         <Route path='/' element={<Home/>}/>
         <Route path='/userLogin' element={<UserLogin/>}/>
         <Route path='/userRegister' element={<UserRegister/>}/>

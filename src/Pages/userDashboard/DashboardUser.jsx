@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './DashboardUser.css'
 import Navbar from '../navbar/Navbar'
 import Button from 'react-bootstrap/Button';
@@ -20,6 +20,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import Footer from '../../components/Footer/Footer';
+import { getUserdetails } from '../../services/allApi';
 
 function DashboardUser() {
 
@@ -28,11 +29,37 @@ function DashboardUser() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const id=localStorage.getItem("userId")
+  console.log(id);
+
+  const token=localStorage.getItem("token")
+  const header={
+    Token:`Bearer ${token}`
+  }
+ 
+ 
+  const fetchDetails=async()=>{
+
+    try {
+      const response=await getUserdetails(id,header) 
+      console.log(response);
+    } catch (error) {
+      alert('Faild to fetch userDetails')
+    }
+    
+  }
+
+  useEffect(()=>{
+    fetchDetails()
+  },[])
+
+
   return (
     <div className='body1'>
       <div >
         <Navbar />
-        <Button className='mx-3 mt-2' variant="dark" onClick={handleShow}>
+        <Button className='mx-3 mt-2' style={{backgroundColor:'#3b82f6'}} onClick={handleShow}>
           Dashboard
         </Button>
 
@@ -47,7 +74,9 @@ function DashboardUser() {
               <Link to={'/userDashboard'}>
                 <ListGroup.Item className='listgrp'>Dashboard</ListGroup.Item>
               </Link>
+              <ListGroup.Item className='listgrp'>User Details</ListGroup.Item>
               <Link to={'/addPost'}><ListGroup.Item className='listgrp'>Add Posts</ListGroup.Item></Link>
+              <ListGroup.Item className='listgrp'>Reset Password</ListGroup.Item>
               <ListGroup.Item className='listgrp'>Log Out</ListGroup.Item>
       
             </ListGroup>

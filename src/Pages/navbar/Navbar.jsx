@@ -26,7 +26,7 @@ function Navbar() {
 
     return (
   <>
-    <MDBNavbar expand='lg' className='navbar'>
+    <MDBNavbar expand='lg' style={{border:"none"}} className='navbar'>
       <MDBContainer fluid>
         <Link to={'/home'}>
         <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>

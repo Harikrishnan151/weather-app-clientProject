@@ -13,22 +13,7 @@ function AdminLogin() {
     const [password,setPassword]=useState()
     const navigate=useNavigate()
 
-    //function to admin login
-    // const handleSubmit=async(e)=>{
-    //     e.preventDefault();
-    //    const body={username,password}
-    //    // Check if any of the fields are empty
-    //    if(!username || !password){
-    //     toast.error('Please fill the feilds')
-    //    }else{
-    //     //api call for admin login
-    //     const response=await adminLogin(body)
-    //     navigate('')
-    //     console.log(username,password);
-    //     toast.success('Login Success')
-    //    }
-       
-    // }
+
     //function for admin login
     const handleSubmit=async(e)=>{
       e.preventDefault();
@@ -58,8 +43,6 @@ function AdminLogin() {
         toast.error('Internal server error')
       }
     }
-
-
 
   return (
     

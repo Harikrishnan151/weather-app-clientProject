@@ -12,7 +12,7 @@ import {
 function Footer() {
   return (
     <div>
-          <MDBFooter className='text-center text-white' style={{ backgroundColor: 'black' }}>
+          <MDBFooter className='footer text-center text-white' >
       <MDBContainer className='pt-4'>
         <section className='mb-4'>
           <MDBBtn

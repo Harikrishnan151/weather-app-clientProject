@@ -6,7 +6,9 @@
     justify-content: center;
     align-items: center;
     min-height: 95vh;
-    background: url('https://images.hdqwalls.com/download/stars-planets-4k-b1-1920x1080.jpg');
+    background: linear-gradient(to bottom right, #0597f2, #3b82f6);
+
+    /* background: url('https://images.hdqwalls.com/download/stars-planets-4k-b1-1920x1080.jpg'); */
     background-size: cover;
     background-position: center;
 }

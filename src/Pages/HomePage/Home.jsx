@@ -68,49 +68,58 @@ function Home() {
           <div>
             {
               dataFetched ?
-              <div className='weather-box'>
-              <div className='box'>
-                <div className='info-weather'>
-                  <div className='weather'>
-                    <img src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
-                    <p className='city'>{weather.city}</p>
-                    <p className='temparature'>{weather.temperature} <span> ℃</span></p>
-                    <p className='description'>{weather.description}</p>
-                  </div>
-                  <div className='humidity'>
-
-                    <div className='text'>
-                      <div className='info-humidity'>
-                        <span><FaWater className='icons' /> {weather.humidity} Humidity</span>
+                <div className='weather-box'>
+                  <div className='box'>
+                    <div className='info-weather'>
+                      <div className='weather'>
+                        <img src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
+                        <p className='city'>{weather.city}</p>
+                        <p className='temparature'>{weather.temperature} <span> ℃</span></p>
+                        <p className='description'>{weather.description}</p>
                       </div>
-                      <div className="container my-3">
-                        <div className="row">
-                          <h4>Suggested to take</h4>
-                          <div className="col">
-                            {
-                              items.map((item, index) => (
-                                <span className='items' key={index}>{item}</span>
-                              ))
-                            }
-                           
+                      <div className='humidity'>
+
+                        <div className='text'>
+                          <div className='info-humidity'>
+                            <span><FaWater className='icons' /> {weather.humidity} Humidity</span>
+                          </div>
+                          <div className="container my-3">
+                            <div className="row">
+                              <h4>Suggested to take</h4>
+                              <div className="col">
+                                {
+                                  items.map((item, index) => (
+                                    <span className='items' key={index}>{item}</span>
+                                  ))
+                                }
+
+                              </div>
+                            </div>
+                            <div className='text-center my-2 '>
+                              <Link to={'/Forecaste'}> <button className='btn btn-primary'>Live Forecast</button> </Link>
+                            </div>
+
                           </div>
                         </div>
-                        <div className='text-center my-2 '>
-                             <Link to={'/Forecaste'}> <button className='btn btn-primary'>Live Forecast</button> </Link>
-                            </div>
                       </div>
+
                     </div>
+
                   </div>
 
                 </div>
+                :
+                <div className='weather-box'>
+                  <img width={60} src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
+                  <div>
+                    <h5 className='content'>Introducing our weather app, your ultimate companion for both emergencies and daily forecasts. Stay ahead with real-time updates, detailed hourly forecasts.</h5>
+                  </div>
+                  <div className='text-center my-5 '>
+                    <Link to={'/Forecaste'}> <button className='btn btn-primary'>Live Forecast</button> </Link>
+                  </div>
+                </div>
 
-              </div>
 
-            </div>
-            :
-            <div className='weather-box'>
-             <img width={60} src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
-          </div>
             }
 
 
