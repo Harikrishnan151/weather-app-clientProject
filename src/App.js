@@ -14,8 +14,10 @@ import EditPost from './Pages/editPost/EditPost';
 import AllPost from './Pages/allpost/AllPost';
 import WeatherForecast from './Pages/weatherForecast/WeatherForecast';
 import Forecasting from './Pages/forecasting/Forecasting';
-import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
+// import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
+
 import UserEmergecy from './Pages/userEmergency/UserEmergecy';
+import Admin from './Pages/AdminDashBoard/Admin';
 // import { AuthContextStatus } from './Pages/AuthContext';
 
 
@@ -31,8 +33,9 @@ function App() {
         <Route path='/userLogin' element={<UserLogin/>}/>
         <Route path='/userRegister' element={<UserRegister/>}/>
         <Route path='/adminLogin' element={<AdminLogin/>}/>
-        <Route path='/AdminDashboard' element={<AdminDashboard/>}/>
-        <Route path='/emergency' element={<Emergency/>}/>
+        {/* <Route path='/AdminDashboard' element={<AdminDashboard/>}/> */}
+        <Route path='/adminDashboard' element={<Admin/>}></Route>
+                <Route path='/emergency' element={<Emergency/>}/>
         <Route path='/home' element={<Landingpage/>}/>
         <Route path='/userEmergency' element={<UserEmergecy/>}/>
         <Route path='/userDashboard' element={<DashboardUser/>}/>
