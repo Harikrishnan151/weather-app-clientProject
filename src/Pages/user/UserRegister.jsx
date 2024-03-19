@@ -18,45 +18,48 @@ function UserRegister() {
   const [confirmPwd, setConfirmpsw] = useState()
   const navigate=useNavigate()
 
-  // // Register data submission
+
   // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   const body={firstName,lastName,username,email,password}
-  //   console.log(username,password,email,firstName,lastName);
-  //  try {
-   
-  //     const response=await userReg(body)
-  //     toast.success("Login Successfull")
-  //     console.log(response);
-  //     setTimeout(()=>{
-  //      naviate('/userLogin')
-  //     },3000)
-  
-
-    
-  //  } catch (error) {
-  //   toast.error("Registeration Faild")
-  //  }
-
+  //   e.preventDefault();
+  //   const body = { first_name,last_name, username, email, password };
+  //   console.log(username, password, email, first_name,last_name);
+  //   try {
+  //     const response = await userReg(body);
+  //     console.log(response.response.status);
+      
+  //     if (response.status === 201) {
+  //       toast.success(response.status);
+  //       setTimeout(() => {
+  //         navigate('/userLogin');
+  //       }, 3000);
+  //     }else if(response.response.status === 400 ){
+  //       toast.error("Account already exist")
+  //     }else{
+  //       toast.error("Internal error")
+  //     }
+  //   } catch (error) {
+  //     toast.error("Registration Failed");
+  //     console.error("Error:", error);
+  //   }
   // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = { first_name,last_name, username, email, password };
-    console.log(username, password, email, first_name,last_name);
+    const body = { first_name, last_name, username, email, password };
+    console.log(username, password, email, first_name, last_name);
     try {
       const response = await userReg(body);
-      console.log(response.response.status);
-      
+      console.log(response.status);
+  
       if (response.status === 201) {
-        toast.success(response.status);
+        toast.success("Registration Successful");
         setTimeout(() => {
-          navigate('/home');
+          navigate('/userLogin');
         }, 3000);
-      }else if(response.response.status === 400 ){
-        toast.error("Account already exist")
-      }else{
-        toast.error("Internal error")
+      } else if (response.response.status === 400) {
+        toast.error("Account already exists");
+      } else {
+        toast.error("Internal error");
       }
     } catch (error) {
       toast.error("Registration Failed");

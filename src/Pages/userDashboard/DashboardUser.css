@@ -6,7 +6,32 @@
     margin-left: 100px;
 
 }
+.listgrp{
+    color: black;
+    cursor: pointer;
+    
+}
+.link-tag{
+    color: black;
+    cursor: pointer;
+    color: inherit;
+}
+.link-tag:hover{
+    color: inherit;
+}
+
+
 .listgrp:hover{
-   background-color: black;
-   color: white;
+    background-color: #0597f2;
+    
+}
+.input-box{
+    border: 1px solid black;
+}
+.submitbtn{
+    display: flex;
+    justify-content: end;
+}
+.reset{
+    color: aqua;
 }
