@@ -40,11 +40,10 @@ export const onedayWeatherForecast=async()=>{
     return commonRequest("GET",`${BASE_URL}weather/accuweather-one-day-forecast/`)
 }
 
-<<<<<<< HEAD
-//getv user details 
-export const getUserdetails=async(id,headers)=>{
-    return commonRequest("GET",`${BASE_URL}users/${id}/`,"",headers)
-}
+// //getv user details 
+// export const getUserdetails=async(id,headers)=>{
+//     return commonRequest("GET",`${BASE_URL}users/${id}/`,"",headers)
+// }
 
 //Emergency view
 
@@ -59,7 +58,6 @@ export const resetPasswordUser= async(body)=>{
     return commonRequest("POST",`${BASE_URL}forgot-password/`,body)
     
 }
-=======
 //get 5 days forecast
 export const fivedayForecast=async()=>{
     return commonRequest("Get",`${BASE_URL}weather/accuweather-5day-forecast/`)
@@ -73,4 +71,3 @@ export const getUserdetails=async(id)=>{
 export const getUserpost=async(header)=>{
     return commonRequest("GET",`${BASE_URL}posts/`,"",header)
 }
->>>>>>> 2f80332c2fedc0161d4fc3181bfc26779859965d

@@ -8,6 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { resetPasswordUser, userLogin } from '../../services/allApi';
 import { useNavigate } from 'react-router-dom';
 import Landingpage from '../UserLandingpage/Landingpage';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { TextField } from '@mui/material';
 
 const style = {
   position: 'absolute'  ,
@@ -38,25 +43,26 @@ const handleClose = () => setOpen(false);
 const resetPassword=async()=>{
 const body ={username}
 console.log(username);
-const response = resetPasswordUser(body)
-console.log(response);
+// 
 
-try {
+// try {
 
-  const response = resetPasswordUser(body)
+  const response = await resetPasswordUser(body)
 if(response.status==200){
   alert('New password send to registered mail')
 
 }
 
 
-} catch (error) {
+// } catch (error) {
+  else{
   alert('username not found')
   setTimeout(() => {
     navigate('/userLogin');
   }, 3000);
 
-}
+// }
+  }
 }
 
 
