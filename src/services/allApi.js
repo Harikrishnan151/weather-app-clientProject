@@ -32,3 +32,17 @@ export const onedayWeatherForecast=async()=>{
 export const getUserdetails=async(id,headers)=>{
     return commonRequest("GET",`${BASE_URL}users/${id}/`,"",headers)
 }
+
+//Emergency view
+
+export const viewEmergency= async()=>{
+    return commonRequest("GET",`${BASE_URL}emergencies/`,"")
+    
+}
+
+// forget password
+export const resetPasswordUser= async(body)=>{
+    console.log(body);
+    return commonRequest("POST",`${BASE_URL}forgot-password/`,body)
+    
+}

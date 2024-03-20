@@ -5,10 +5,26 @@ import { IoIosLock } from "react-icons/io";
 import Header from '../../components/Header/Header';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { userLogin } from '../../services/allApi';
+import { resetPasswordUser, userLogin } from '../../services/allApi';
 import { useNavigate } from 'react-router-dom';
 import DashboardUser from '../userDashboard/DashboardUser';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
 
+const style = {
+  position: 'absolute'  ,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 // import { AuthContextStatus } from '../AuthContext';
 
 function UserLogin() {
@@ -18,6 +34,35 @@ const[password,setpassword]=useState()
  const navigate=useNavigate()
  const [loggedIn, setLoggedIn] = useState(false);
 //  const {authorizsed, setAuthorised} = useContext(AuthContextStatus)
+const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+
+
+// forget pass word api
+const resetPassword=async()=>{
+const body ={username}
+console.log(username);
+const response = resetPasswordUser(body)
+console.log(response);
+
+try {
+
+  const response = resetPasswordUser(body)
+if(response.status==200){
+  alert('New password send to registered mail')
+
+}
+
+
+} catch (error) {
+  alert('username not found')
+  setTimeout(() => {
+    navigate('/userLogin');
+  }, 3000);
+
+}
+}
 
 
 
@@ -77,7 +122,8 @@ const handleSubmit=async(e)=>{
         </div>
         <div className='remember-forgot'>
           <label><input type="checkbox" />Remember Me?</label>
-          <a href="">Forgot Password ?</a>
+          <a href='#' onClick={handleOpen}>Forgot Password ?</a>
+          {/* <Button className='btn-btn-secondary'  color="secondary" onClick={handleOpen}>forgot password</Button> */}
 
           
         </div>
@@ -88,6 +134,26 @@ const handleSubmit=async(e)=>{
 
 
       </form>
+      <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+           Forgot password
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <TextField className='w-100' id="outlined-basic" onChange={(e)=>setuserName(e.target.value)}  placeholder='Enter your Registered Username' variant="outlined" />
+          <div className='text-center p-5' >
+          <Button variant="info" onClick={resetPassword} >Submit</Button>{' '}
+          </div>
+          </Typography>
+        </Box>
+      </Modal>
+      </div>
 
     </div>
 

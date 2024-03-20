@@ -49,7 +49,7 @@ function UserRegister() {
       console.log(response.response.status);
       
       if (response.status === 201) {
-        toast.success(response.status);
+        toast.success('login successfully');
         setTimeout(() => {
           navigate('/home');
         }, 3000);
