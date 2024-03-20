@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import './UserLogin.css'
 import { IoIosLock } from "react-icons/io";
@@ -7,12 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { resetPasswordUser, userLogin } from '../../services/allApi';
 import { useNavigate } from 'react-router-dom';
-import DashboardUser from '../userDashboard/DashboardUser';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
+import Landingpage from '../UserLandingpage/Landingpage';
 
 const style = {
   position: 'absolute'  ,
@@ -78,17 +73,20 @@ const handleSubmit=async(e)=>{
       //api call for admin login
       const response=await userLogin(body)
       console.log(response);
-       if(response.status==200){
+       if(response.status===200){
         localStorage.setItem("token",response.data.access) 
         localStorage.setItem("userId",response.data.user.id)
         setLoggedIn(true);
-       alert('Login Success')
+        toast.success('Login Successful')
       //  setAuthorised(true)
-        navigate('/home')
-       }else if(response.status==401){
-        alert('invalid usernane or password')
+      setTimeout(()=>{
+        navigate('/home');
+      },3000)
+ 
+       }else if(response.response.status===401){
+        toast.error('invalid usernane or password')
        }else{
-        alert('Account does not exist')
+        toast.error('Account does not exist')
        }
       
      }
@@ -101,11 +99,8 @@ const handleSubmit=async(e)=>{
 
   return (
   <>
-  {
-    loggedIn?(
-      <DashboardUser/>
-    ):(
-          // design login page
+
+          {/* // design login page */}
     <div className='userlogin'>
      
     
@@ -160,8 +155,7 @@ const handleSubmit=async(e)=>{
 
     <ToastContainer position='top-center' />
   </div>
-    )
-  }
+   
   </>
 
 
