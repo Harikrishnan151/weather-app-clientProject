@@ -67,7 +67,7 @@ useEffect(()=>{
   return (
     <div>
      <Row className='text-center container '>
-    { emergencyData.map(i=>
+    { emergencyData?emergencyData.map(i=>
         <Col sm={12} >
 
          <Card sx={{ maxWidth: 345 }}>
@@ -97,7 +97,7 @@ useEffect(()=>{
     </Card>
         
         </Col>
-     )}
+     ):"No items found"}
      </Row>
 
 {/* view zoom image */}
