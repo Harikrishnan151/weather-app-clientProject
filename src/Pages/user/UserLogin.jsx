@@ -50,6 +50,10 @@ console.log(username);
   const response = await resetPasswordUser(body)
 if(response.status==200){
   alert('New password send to registered mail')
+  handleClose()
+  setTimeout(()=>{
+    navigate('/userLogin')
+  },3000)
 
 }
 
@@ -57,6 +61,7 @@ if(response.status==200){
 // } catch (error) {
   else{
   alert('username not found')
+  handleClose()
   setTimeout(() => {
     navigate('/userLogin');
   }, 3000);
@@ -86,6 +91,7 @@ const handleSubmit=async(e)=>{
         toast.success('Login Successful')
       //  setAuthorised(true)
       setTimeout(()=>{
+        
         navigate('/home');
       },3000)
  

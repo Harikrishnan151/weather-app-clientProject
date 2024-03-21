@@ -52,6 +52,12 @@ export const viewEmergency= async()=>{
     
 }
 
+// emergency add
+
+export const addEmergency = async (userdata,header) =>{
+    return commonRequest("POST",`${BASE_URL}emergencies/`,userdata,header)
+}
+
 // forget password
 export const resetPasswordUser= async(body)=>{
     console.log(body);
@@ -71,3 +77,4 @@ export const getUserdetails=async(id)=>{
 export const getUserpost=async(header)=>{
     return commonRequest("GET",`${BASE_URL}posts/`,"",header)
 }
+

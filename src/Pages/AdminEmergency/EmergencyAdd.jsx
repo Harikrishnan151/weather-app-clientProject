@@ -1,56 +1,138 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import './Emergency.css'
+import Button from 'react-bootstrap/Button';
+import { Col, Row } from 'react-bootstrap';
+import { addEmergency } from '../../services/allApi';
+
 function EmergencyAdd() {
+
+  const [data,setdata]=useState(
+    {
+      
+      title: " ",
+      address: " ",
+      location: " ",
+      description: " ",
+     
+      phone_number: " ",
+      admin_user:''
+  }
+  )
+  const [image,setimage]=useState()
+  
+  const  handleChange=(e)=>{
+
+    const {name,value}= e.target
+    setdata({...data,[name]:value})
+   
+  }
+
+  const handleSubmit = async()=>
+  {console.log(data);
+  console.log(image);
+  const token = localStorage.getItem('token')
+  console.log(token);
+
+  const formData = new FormData()
+  formData.append("title",data.title)
+  formData.append("address",data.address)
+  formData.append("location",data.location)
+  formData.append("description",data.description)
+  formData.append("phone_number",data.phone_number)
+  formData.append("admin_user",data.admin_user)
+  formData.append("image",image)
+  console.log(formData);
+
+  const header={
+   Authorization :`api-key ${token}`,
+    'Content-Type': 'multipart/form-data' 
+}
+ const response = await  addEmergency(formData,header)
+ console.log(response);
+}
+
+
+
   return (
-    <div className='container text-center w-75 mt-5 p-5 wrapper' >
-     <div className='container ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Title </Form.Label>
-        <Form.Control
-          type="password"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
-     </div>
-     <div className='container mt-5 ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Phone Number </Form.Label>
-        <Form.Control
-          type="password"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
-     </div>
-     <div className='container mt-5 ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Location </Form.Label>
-        <Form.Control
-          type="password"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
-     </div>
-     <div className='container mt-5 ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Address </Form.Label>
-        <Form.Control
-          type="password"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
-     </div>
-     <div className='container mt-5 ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Description </Form.Label>
-        <Form.Control
-          type="password"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
-     </div>
-     <div className='container mt-5 ' style={{display:'flex'}}>
-       <Form.Label className='me-5' htmlFor="inputPassword5">Image Upload </Form.Label>
-        <Form.Control
-          type="file"
-          id="inputPassword5"
-          aria-describedby="passwordHelpBlock"
-        />
+    <div className='container text-center  mt-5wrapper' >
+<div>
+  <h3 className='text-primary mb-5 text-center'>Register Emergency</h3>
+</div>
+     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+          Admin User
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='admin_user'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      
+     <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+          Titile
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='title'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+        Location
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='location'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+        Address
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='address'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+       PhoneNumber
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='phone_number'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+       Description
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="text"
+          name='description'
+          onChange={handleChange} placeholder="" />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className="mb-3 ms-2" controlId="formHorizontalEmail">
+        <Form.Label column sm={4}>
+       Image
+        </Form.Label>
+        <Col sm={7}>
+          <Form.Control type="file"
+          name='image'
+          onChange={(e)=>setimage(e.target.files[0])} placeholder="" />
+        </Col>
+      </Form.Group>
+      
+     <div>
+     <Button type='submit'  className='w-25 mt-5'  onClick={handleSubmit} variant="success">Submit</Button>{' '}
      </div>
     </div>
   )

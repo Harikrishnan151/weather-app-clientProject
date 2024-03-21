@@ -65,13 +65,13 @@ useEffect(()=>{
 
 
   return (
-    <div>
+    <div className='container'>
      <Row className='text-center container '>
     { emergencyData?emergencyData.map(i=>
-        <Col sm={12} >
+        <Col sm={12} md={4} className='p-3'>
 
-         <Card sx={{ maxWidth: 345 }}>
-      <img className='mt-3' style={{height:'200px', width:'200px',cursor:'pointer'}}
+         <Card style={{height:'500px'}} >
+      <img className='mt-3 w-50' style={{cursor:'pointer'}}
        id={i.id} src={`${BASE_URL}${i.image}`}
         alt=""
         onClick={()=>handleImageClick(`${BASE_URL}${i.image}`)} />
@@ -91,13 +91,13 @@ useEffect(()=>{
         </Typography>
       </CardContent>
       <CardActions>
-        {/* <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button> */}
+        <Button size="small">Edit</Button>
+        <Button size="small">Delete</Button>
       </CardActions>
     </Card>
         
         </Col>
-     ):"No items found"}
+     ):<div className='text-center'><h3>"No items found"</h3></div>}
      </Row>
 
 {/* view zoom image */}
