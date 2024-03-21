@@ -78,3 +78,34 @@ export const getUserpost=async(header)=>{
     return commonRequest("GET",`${BASE_URL}posts/`,"",header)
 }
 
+
+//reset user password
+export const resetPassword=async(body)=>{
+    return commonRequest("POST",`${BASE_URL}reset-password/`,body)
+}
+
+//delete user post
+export const deleteUserpost=async(id,headers)=>{
+    return commonRequest("DELETE",`${BASE_URL}posts/${id}/`,"",headers)
+}
+
+//get user badge
+export const getUserbadge=async(body)=>{
+    return commonRequest('GET',`${BASE_URL}user-badges/`,body)
+}
+
+
+//reset user password
+export const resetPassword=async(body)=>{
+    return commonRequest("POST",`${BASE_URL}reset-password/`,body)
+}
+
+//delete user post
+export const deleteUserpost=async(id,headers)=>{
+    return commonRequest("DELETE",`${BASE_URL}posts/${id}/`,"",headers)
+}
+
+//get user badge
+export const getUserbadge=async(body)=>{
+    return commonRequest('GET',`${BASE_URL}user-badges/`,body)
+}

@@ -20,12 +20,23 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import Footer from '../../components/Footer/Footer';
-import { getUserdetails, getUserpost } from '../../services/allApi';
+import { deleteUserpost, getUserbadge, getUserdetails, getUserpost } from '../../services/allApi';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ToastContainer, toast } from 'react-toastify';
+import BASE_URL from '../../services/baseurl';
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+} from 'mdb-react-ui-kit';
 
 const style = {
   position: 'absolute',
@@ -41,23 +52,26 @@ const style = {
 
 function DashboardUser() {
 
+  const [basicModal, setBasicModal] = useState(false);
+
+  const toggleOpen = () => setBasicModal(!basicModal);
+
   //modal
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose2 = () => setOpen(false);
+
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [user,setUser]=useState({})
-  const [userPost,setUserpost]=useState([])
+  const [user, setUser] = useState({})
+  const [userPost, setUserpost] = useState([])
 
   // function to block invalid user login
-  const invalidLogin=()=>{
+  const invalidLogin = () => {
     const token = localStorage.getItem("token")
-    if(!token){
+    if (!token) {
       alert('please login')
       navigate('/')
     }
@@ -67,11 +81,11 @@ function DashboardUser() {
   const id = localStorage.getItem("userId")
   console.log(id);
 
- 
 
 
-    const navigate=useNavigate()
-// api to fetch user details
+
+  const navigate = useNavigate()
+  // api to fetch user details
   const fetchDetails = async () => {
 
     try {
@@ -86,12 +100,12 @@ function DashboardUser() {
   console.log(user);
 
   //function to logout user
-  const logoutUser=()=>{
+  const logoutUser = () => {
     localStorage.clear();
     toast.success('Logging out')
-     setTimeout(()=>{
+    setTimeout(() => {
       navigate('/')
-     },3000)
+    }, 3000)
   }
 
   const token = localStorage.getItem("token")
@@ -100,9 +114,9 @@ function DashboardUser() {
   }
 
   //function to get all user post
-  const fetchPost=async()=>{
+  const fetchPost = async () => {
     try {
-      const postDetails=await getUserpost(header)
+      const postDetails = await getUserpost(header)
       console.log(postDetails.data)
       setUserpost(postDetails.data)
     } catch (error) {
@@ -111,10 +125,45 @@ function DashboardUser() {
   }
   console.log(userPost)
 
+  const tokens = localStorage.getItem("token")
+  const headers = {
+    Authorization: `Bearer ${tokens}`
+  }
+  //function to delete user post
+  const deletePost = async (id) => {
+    try {
+      const result = await deleteUserpost(id, headers)
+      console.log(result)
+     if(result.status===204){
+      toast.success('user post deleted')
+      fetchPost()
+     }else if(result.status===404){
+      toast.error('user not autherized to delete')
+     }
+    } catch (error) {
+      alert('faild to delete user post')
+    }
+  }
+
+  //function to get user badge
+  // const user_id = localStorage.getItem("userId")
+  // console.log(user_id);
+  // const userBadge=async(user_id)=>{
+  //  try {
+  //   const response=await getUserbadge(user_id)
+  //   console.log(response);
+    
+  //  } catch (error) {
+  //   alert('error to fetch user badge ')
+  //  }
+
+  // }
+
   useEffect(() => {
     fetchDetails()
     fetchPost()
     invalidLogin()
+    // userBadge()
   }, [])
 
 
@@ -124,7 +173,7 @@ function DashboardUser() {
       <div >
         <Navbar />
         <Button className='mx-3 mt-2' style={{ backgroundColor: '#3b82f6' }} onClick={handleShow}>
-        <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-bars"></i>
         </Button>
 
         <Offcanvas show={show} onHide={handleClose}>
@@ -139,9 +188,9 @@ function DashboardUser() {
                 <ListGroup.Item className='listgrp text-black '>Dashboard</ListGroup.Item>
               </Link>
               <ListGroup.Item className='listgrp text-black '>User Details</ListGroup.Item>
-              <Link  to={'/addPost'}><ListGroup.Item className='listgrp text-black '>Add Posts</ListGroup.Item></Link>
-              <ListGroup.Item className='listgrp text-black'> <Link className='link-tag'  href="#" onClick={handleOpen}>Reset Password</Link></ListGroup.Item>
-              <ListGroup.Item onClick={()=>logoutUser()}  className='listgrp text-black '>Log Out</ListGroup.Item>
+              <Link to={'/addPost'}><ListGroup.Item className='listgrp text-black '>Add Posts</ListGroup.Item></Link>
+              <Link to={'/Reset-Password'}><ListGroup.Item className='listgrp text-black'>Reset Password</ListGroup.Item> </Link>
+              <ListGroup.Item onClick={() => logoutUser()} className='listgrp text-black '>Log Out</ListGroup.Item>
 
             </ListGroup>
           </Offcanvas.Body>
@@ -151,49 +200,49 @@ function DashboardUser() {
       <div className='container'>
         <Row >
           {
-              userPost.map((postData)=>(
-                <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
+            userPost.map((postData) => (
+              <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
 
                 <Link style={{ textDecoration: 'none' }}>
                   <MDBCard className='card mt-5'>
-                    <MDBCardImage src='http://127.0.0.1:8000/{postData.image}' position='top' alt='...' />
+                    <MDBCardImage className='postImg' height={'200px'} src={`${BASE_URL}${postData.image}`} position='top' alt='...' />
                     <MDBCardBody>
                       <MDBCardTitle className='text-dark'>{postData.title}</MDBCardTitle>
                       <MDBCardText >
-                      {postData.description} <br />
-                        <FaLocationDot /> CANADA
+                        {postData.description} <br />
+                        <FaLocationDot /> {postData.location}
                       </MDBCardText>
                       <div className='bottom-content d-flex justify-content-between '>
                         <div className="action-item">
-                          <span><FaHeart className='text-danger' /> 14 Like</span>
+                          <span><FaHeart className='text-danger' /> {postData.likes} Likes</span>
                         </div>
                         <div className="action-item">
-                          <span><FaCommentAlt /> 4 comments</span>
+                          <span><FaCommentAlt />{postData.comments} comments</span>
                         </div>
                       </div>
-                      <div className="userActions d-flex justify-content-between my-3 ">
+                      <div className="userActions d-flex justify-content-between mt-2 ">
                         <div className="edit">
                           <Link to={'/editPost'}>
                             <span> <FaEdit /></span>
                           </Link>
-  
+
                         </div>
                         <div className="edit">
                           <Link>
-                            <span> <FaTrashCan className='text-danger' /></span>
+                            <span> <FaTrashCan onClick={()=>deletePost(postData.id)} className='text-danger' /></span>
                           </Link>
-  
+
                         </div>
                       </div>
-  
+
                     </MDBCardBody>
                   </MDBCard>
                 </Link>
-  
-  
+
+
               </Col>
-              ))
-           
+            ))
+
 
           }
 
@@ -201,35 +250,10 @@ function DashboardUser() {
         </Row>
 
         <div>
-         
-          <Modal
-            open={open}
-            onClose={handleClose2}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Reset Password
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <form >
-                <div class="form-outline" data-mdb-input-init>
-                  <input className='input-box' type="text" id="formControlLg" class="form-control form-control-lg border  " />
-                  <label class="form-label" for="formControlLg">Enter Username</label>
-                </div>
 
-                <div  class="form-outline my-3" data-mdb-input-init>
-                  <input type="text" id="formControlLg" class="form-control form-control-lg border" />
-                  <label class="form-label" for="formControlLg">Enter new password</label>
-                </div>
-                <div className='submitbtn my-2'>
-                  <button className='btn btn-primary'>Submit</button>
-                </div>
-                </form>
-              </Typography>
-            </Box>
-          </Modal>
+
+
+
         </div>
         <ToastContainer position='top-center' />
       </div>
