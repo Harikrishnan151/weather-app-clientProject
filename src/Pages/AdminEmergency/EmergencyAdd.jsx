@@ -42,7 +42,7 @@ function EmergencyAdd() {
   formData.append("phone_number",data.phone_number)
   formData.append("admin_user",data.admin_user)
   formData.append("image",image)
-  console.log(formData);
+  // console.log(formData);
 
   const header={
    Authorization :`api-key ${token}`,

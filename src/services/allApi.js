@@ -94,18 +94,31 @@ export const getUserbadge=async(body)=>{
     return commonRequest('GET',`${BASE_URL}user-badges/`,body)
 }
 
-
-//reset user password
-export const resetPassword=async(body)=>{
-    return commonRequest("POST",`${BASE_URL}reset-password/`,body)
+export const getSingleEmergency=async(id,header)=>{
+    return commonRequest("GET",`${BASE_URL}emergencies/${id}/`,"",header)
 }
+
+export const deleteEmergencyData=async(id,header)=>{
+
+    return commonRequest("DELETE",`${BASE_URL}emergencies/${id}/`,"",header)
+}
+
+export const updateEmergencyData=async(id,formdata,header)=>{
+    
+    return commonRequest("PUT",`${BASE_URL}emergencies/${id}/`,formdata,header)
+}
+
+// //reset user password
+// export const resetPassword=async(body)=>{
+//     return commonRequest("POST",`${BASE_URL}reset-password/`,body)
+// }
 
 //delete user post
-export const deleteUserpost=async(id,headers)=>{
-    return commonRequest("DELETE",`${BASE_URL}posts/${id}/`,"",headers)
-}
+// export const deleteUserpost=async(id,headers)=>{
+//     return commonRequest("DELETE",`${BASE_URL}posts/${id}/`,"",headers)
+// }
 
-//get user badge
-export const getUserbadge=async(body)=>{
-    return commonRequest('GET',`${BASE_URL}user-badges/`,body)
-}
+// //get user badge
+// export const getUserbadge=async(body)=>{
+//     return commonRequest('GET',`${BASE_URL}user-badges/`,body)
+// }

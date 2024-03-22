@@ -6,10 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Col, Row } from 'react-bootstrap';
-import { viewEmergency } from '../../services/allApi';
+import { deleteEmergencyData, viewEmergency } from '../../services/allApi';
 import BASE_URL from '../../services/baseurl';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -24,6 +26,8 @@ const style = {
 function EmergencyView() {
     
 const [emergencyData,setemergencyData]=useState([])
+const [EmergencySingleview ,setEmergencySingleview] = useState({})
+
 const [zoomedImage, setZoomedImage] = useState(null);
 const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
@@ -49,13 +53,27 @@ const fetchEmergencyData=async()=>{
 
 //zoom image in click
 const handleImageClick = (imageUrl)=>{
-  handleOpen();
+  handleOpen(); 
+
   setZoomedImage(imageUrl)
 }
 const handleCloseZoom = () => {
   setZoomedImage(null);
   handleClose()
 };
+
+const DeleteEmergency=async(id)=>{
+  const token= localStorage.getItem('token')
+console.log(token);
+const header={
+  Authorization :`api-key ${token}`,
+  //  'Content-Type': 'multipart/form-data' 
+}
+
+  const response = await deleteEmergencyData(id,header)
+  fetchEmergencyData()
+}
+
 
 useEffect(()=>{
     fetchEmergencyData()
@@ -91,8 +109,8 @@ useEffect(()=>{
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
-        <Button size="small">Delete</Button>
+        <Link to={`/EmergencySingleView/${i.id}`}><Button size="small">Edit</Button></Link>
+        <Button onClick={()=>DeleteEmergency(i.id)} size="small">Delete</Button>
       </CardActions>
     </Card>
         

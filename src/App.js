@@ -15,9 +15,10 @@ import AllPost from './Pages/allpost/AllPost';
 import WeatherForecast from './Pages/weatherForecast/WeatherForecast';
 import Forecasting from './Pages/forecasting/Forecasting';
 // import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import Admin from './Pages/AdminDashboard/Admin'
+import Admin from './Pages/AdminDashBoard/Admin'
 import UserEmergecy from './Pages/userEmergency/UserEmergecy';
 import ResetPassword from './Pages/resetpassword/ResetPassword';
+import EmergencySingleView from './Pages/AdminEmergency/EmergencySingleView';
 // import { AuthContextStatus } from './Pages/AuthContext';
 
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='/weatherForecast' element={<WeatherForecast/>}/>
         <Route path='/Forecaste' element={<Forecasting/>}/>
         <Route path='/Reset-Password' element={<ResetPassword/>}/>
+        <Route path='/EmergencySingleView/:id' element={<EmergencySingleView/>}></Route>
       </Routes>
       
      
