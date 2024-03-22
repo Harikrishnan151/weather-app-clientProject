@@ -50,6 +50,12 @@ export const viewEmergency= async()=>{
     
 }
 
+// emergency add
+
+export const addEmergency = async (userdata,header) =>{
+    return commonRequest("POST",`${BASE_URL}emergencies/`,userdata,header)
+}
+
 // forget password
 export const resetPasswordUser= async(body)=>{
     console.log(body);
@@ -109,3 +115,18 @@ export const userPost=async(id,header)=>{
 // export const editUserpost=async(id,body,headers)=>{
 //     return commonRequest("PUT",`${BASE_URL}posts/${id}/`,body,headers)
 // }
+
+export const getSingleEmergency=async(id,header)=>{
+    return commonRequest("GET",`${BASE_URL}emergencies/${id}/`,"",header)
+}
+
+export const deleteEmergencyData=async(id,header)=>{
+
+    return commonRequest("DELETE",`${BASE_URL}emergencies/${id}/`,"",header)
+}
+
+export const updateEmergencyData=async(id,formdata,header)=>{
+    
+    return commonRequest("PUT",`${BASE_URL}emergencies/${id}/`,formdata,header)
+}
+

@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiAdminLine } from "react-icons/ri";
 import { BiHome } from "react-icons/bi";
 import './Sidebar.css'
 import './AdminMain.css'
 import EmergencyView from '../AdminEmergency/EmergencyView';
 import EmergencyAdd from '../AdminEmergency/EmergencyAdd';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 function Admin() {
 
   const [view,setview]=useState(false)
   const [addEmergency,setEmergency]=useState(false)
+  const navigate = useNavigate()
 
   const viewEmergency=(e)=>{
     e.preventDefault()
@@ -25,6 +27,27 @@ function Admin() {
 
   }
 
+  //logout
+  const logout =()=>{
+    localStorage.clear()
+    alert(" loging out")
+   navigate('/')
+  }
+
+  // function to block invalid login
+  const invalidLogin=()=>{
+    const token=localStorage.getItem('token')
+    if(!token){
+      alert("please Login first")
+      navigate('/')
+    }
+    
+  }
+
+  useEffect(()=>{
+ invalidLogin()
+
+  },[])
 
   return (
     <div className='dashboard'>
@@ -47,7 +70,7 @@ function Admin() {
       <BiHome className='icon' />
       Emergency Add
       </a>
-      <a href="" className='item'>
+      <a href="" onClick={()=>logout()}  className='item'>
       <BiHome className='icon' />
       Logout
       </a>
