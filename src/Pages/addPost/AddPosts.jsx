@@ -13,6 +13,9 @@ import { useNavigate } from 'react-router-dom';
 
 function AddPosts() {
 
+  const userID=localStorage.getItem('userId')
+  console.log(userID);
+
   const navigate=useNavigate()
   const [postDetails,setPostdetails]=useState({
     user:"",
@@ -30,8 +33,6 @@ function AddPosts() {
   }
   console.log(postDetails)
 console.log(image);
-
-
 
 
 
@@ -81,7 +82,7 @@ const AddPosts=async(e)=>{
 
             <h1>Add Post</h1>
             <div className='input-box1'>
-              <input onChange={handleChange}  type="text" placeholder='user id'  name='user' required />
+              <input onChange={handleChange} value={userID} disabled type="text" placeholder='user id'  name='user' required />
               <FaRegUser  className='icon' />
             </div>
 
