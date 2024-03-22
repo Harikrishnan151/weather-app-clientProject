@@ -38,3 +38,8 @@
 .card-top-image{
     height: 300px;
 }
+.userBadge{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './UserEmergency.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,9 +13,23 @@ import {
   import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import { getEmergency } from '../../services/allApi';
+import BASE_URL from '../../services/baseurl';
 
 
 function UserEmergecy() {
+
+  const [emergency,setEmergency]=useState([])
+
+  const fetchEmergency=async()=>{
+    const response=await getEmergency()
+    console.log(response.data);
+    setEmergency(response.data)
+  }
+console.log(emergency)
+  useEffect(()=>{
+    fetchEmergency()
+  },[])
   return (
     <div>
         <Navbar/>
@@ -24,23 +38,25 @@ function UserEmergecy() {
       
     <Row className='p-5'>
       {
+         emergency.map((item)=>(
+          <Col sm={12} md={6} lg={4} xl={3} className='py-4'>
 
-        <Col sm={12} md={6} lg={4} xl={3} className='py-4'>
+        <Link to={`view/`} style={{ textDecoration: 'none' }}>
+          <MDBCard style={{height:'370px'}} className='card '>
+            <MDBCardImage height={'200px'} src={`${BASE_URL}${item.image}`} position='top' alt='...' />
+            <MDBCardBody>
+              <MDBCardTitle className='text-dark'>{item.title}</MDBCardTitle>
+              <MDBCardText >
+                Location : <span style={{color:'black'}}>{item.location}</span>  <br />
+                Address : <span style={{color:'black'}}>{item.address}</span>   <br />
+                Number: <span style={{color:'black'}}>{item.phone_number}</span> 
+              </MDBCardText>
 
-          <Link to={`view/`} style={{ textDecoration: 'none' }}>
-            <MDBCard className='card '>
-              <MDBCardImage src='https://www.takeoffaviationindia.com/assets/img/courses/5.jpg' position='top' alt='...' />
-              <MDBCardBody>
-                <MDBCardTitle className='text-dark'>Fire Force</MDBCardTitle>
-                <MDBCardText >
-                  Address :  <br />
-                  Number:
-                </MDBCardText>
-
-              </MDBCardBody>
-            </MDBCard>
-          </Link>
-        </Col>
+            </MDBCardBody>
+          </MDBCard>
+        </Link>
+      </Col>
+         ))
       }
 
     </Row>

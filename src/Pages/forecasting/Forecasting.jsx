@@ -133,9 +133,6 @@ function Forecasting() {
 
   useEffect(()=>{
     fetchOnehour()
-    fetchHourlyforecast()
-    fetchOnedayforecast()
-    fetchFivedayforecast()
   },[])
 
   return (
@@ -145,9 +142,9 @@ function Forecasting() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="One Hour Forecast" {...a11yProps(0)} />
-          <Tab label="Hourly Forecast" {...a11yProps(1)} />
-          <Tab label="One Day Forecast" {...a11yProps(2)} />
-          <Tab label="Five Day Forecast" {...a11yProps(3)} />
+          <Tab onClick={fetchHourlyforecast} label="Hourly Forecast" {...a11yProps(1)} />
+          <Tab onClick={fetchOnedayforecast} label="One Day Forecast" {...a11yProps(2)} />
+          <Tab onClick={fetchFivedayforecast} label="Five Day Forecast" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -161,11 +158,12 @@ function Forecasting() {
             <StyledTableCell align="right">Weather</StyledTableCell>
             <StyledTableCell align="right">IsDaylight</StyledTableCell>
             <StyledTableCell align="right">HasPrecipitation</StyledTableCell>
-            <StyledTableCell align="right">PrecipitationProbability</StyledTableCell>
+            <StyledTableCell align="right">Precipitation-Probability</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {oneHour.map((onehourWeather) => (
+          {
+           oneHour?oneHour.map((onehourWeather) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
                 {onehourWeather.DateTime}
@@ -176,7 +174,10 @@ function Forecasting() {
               <StyledTableCell align="right">{onehourWeather.HasPrecipitation.toString()}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather. PrecipitationProbability}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          )): <div >
+            <h5 className='my-2'>Api Key expired</h5>
+          </div>
+          }
         </TableBody>
       </Table>
     </TableContainer>
@@ -189,23 +190,27 @@ function Forecasting() {
           <TableRow>
             <StyledTableCell>Date & Time</StyledTableCell>
             <StyledTableCell align="right">Tempature</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell align="right">IsDaylight</StyledTableCell>
+            <StyledTableCell align="right">HasPrecipitation</StyledTableCell>
+            <StyledTableCell align="right">Precipitation-Probability</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {((hourlyData) => (
+          {
+          hourly?((hourlyData) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {}
+                {hourlyData.DateTime}
               </StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
+              <StyledTableCell align="right">{hourlyData.Temperature.Value} {hourlyData.Temperature.Unit }</StyledTableCell>
+              <StyledTableCell align="right">{hourlyData.IconPhrase}</StyledTableCell>
+              <StyledTableCell align="right">{hourlyData.HasPrecipitation.toString()}</StyledTableCell>
+              <StyledTableCell align="right">{hourlyData. PrecipitationProbability}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          )):<div>
+            <h5 className='my-2'>Api key expired</h5>
+          </div>
+        }
         </TableBody>
       </Table>
     </TableContainer>

@@ -23,8 +23,6 @@ export const getWeather=async(city)=>{
     return commonRequest("GET",`${BASE_URL}weather/weather/${city}/`)
 }
 
-
-
 //get 1 hour forecast
 export const onehourForecast=async()=>{
     return commonRequest("GET",`${BASE_URL}weather/accuweather-one-hourly-forecast/`)
@@ -84,6 +82,30 @@ export const deleteUserpost=async(id,headers)=>{
 }
 
 //get user badge
-export const getUserbadge=async(body)=>{
-    return commonRequest('GET',`${BASE_URL}user-badges/`,body)
+export const getUserbadge=async(user_id)=>{
+    return commonRequest('GET',`${BASE_URL}user-badges/?user_id=${user_id}`)
 }
+
+//Add new weather post 
+export const addUserpost=async(body,header)=>{
+    return commonRequest("POST",`${BASE_URL}posts/`,body,header)
+}
+
+//Api to get all emergency details inside user profile
+export const getEmergency=async()=>{
+    return commonRequest("GET",`${BASE_URL}emergencies/`)
+}
+
+//Api call to get all weather post 
+export const getAllWeatherpost=async()=>{
+    return commonRequest("GET",`${BASE_URL}all-posts/`)
+}
+
+//Api to get user post individully
+export const userPost=async(id,header)=>{
+    return commonRequest('GET',`${BASE_URL}posts/${id}/`,"",header)
+}
+//Api to edit user post
+// export const editUserpost=async(id,body,headers)=>{
+//     return commonRequest("PUT",`${BASE_URL}posts/${id}/`,body,headers)
+// }

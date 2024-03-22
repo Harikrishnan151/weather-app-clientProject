@@ -67,6 +67,7 @@ function DashboardUser() {
 
   const [user, setUser] = useState({})
   const [userPost, setUserpost] = useState([])
+  const [userBadges,setUserBadge]=useState([])
 
   // function to block invalid user login
   const invalidLogin = () => {
@@ -146,24 +147,28 @@ function DashboardUser() {
   }
 
   //function to get user badge
-  // const user_id = localStorage.getItem("userId")
-  // console.log(user_id);
-  // const userBadge=async(user_id)=>{
-  //  try {
-  //   const response=await getUserbadge(user_id)
-  //   console.log(response);
+  const user_id = (localStorage.getItem("userId"))
+  console.log(user_id);
+  const userBadge=async()=>{
+   try {
+   console.log(user_id);
+    const response=await getUserbadge(user_id)
+    console.log(response);
+    setUserBadge(response.data)
     
-  //  } catch (error) {
-  //   alert('error to fetch user badge ')
-  //  }
+   } catch (error) {
+    alert('error to fetch user badge ')
+   }
+   console.log(userBadges)
 
-  // }
+  }
+
 
   useEffect(() => {
     fetchDetails()
     fetchPost()
     invalidLogin()
-    // userBadge()
+    userBadge()
   }, [])
 
 
@@ -183,11 +188,14 @@ function DashboardUser() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <MDBCardImage className='userProfile my-3' style={{ width: '8rem', height: '8rem;', overflow: 'hidden' }} src='https://cdn-icons-png.flaticon.com/512/9131/9131529.png' position='top' alt='...' />
+            <div className='userBadge my-3'>
+            <h6>{userBadges.badge}</h6>
+            <img height={'30px'} src={`${BASE_URL}${userBadges.badge_image}`} alt="" />
+            </div>
             <ListGroup>
               <Link to={'/userDashboard'}>
                 <ListGroup.Item className='listgrp text-black '>Dashboard</ListGroup.Item>
               </Link>
-              <ListGroup.Item className='listgrp text-black '>User Details</ListGroup.Item>
               <Link to={'/addPost'}><ListGroup.Item className='listgrp text-black '>Add Posts</ListGroup.Item></Link>
               <Link to={'/Reset-Password'}><ListGroup.Item className='listgrp text-black'>Reset Password</ListGroup.Item> </Link>
               <ListGroup.Item onClick={() => logoutUser()} className='listgrp text-black '>Log Out</ListGroup.Item>
@@ -200,7 +208,7 @@ function DashboardUser() {
       <div className='container'>
         <Row >
           {
-            userPost.map((postData) => (
+           userPost?userPost.map((postData) => (
               <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
 
                 <Link style={{ textDecoration: 'none' }}>
@@ -222,7 +230,7 @@ function DashboardUser() {
                       </div>
                       <div className="userActions d-flex justify-content-between mt-2 ">
                         <div className="edit">
-                          <Link to={'/editPost'}>
+                          <Link to={`/editPost/${postData.id}`}>
                             <span> <FaEdit /></span>
                           </Link>
 
@@ -241,7 +249,10 @@ function DashboardUser() {
 
 
               </Col>
-            ))
+            )):
+            <div className="container">
+              
+            </div>
 
 
           }

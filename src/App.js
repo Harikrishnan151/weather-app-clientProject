@@ -40,7 +40,7 @@ function App() {
         <Route path='/userEmergency' element={<UserEmergecy/>}/>
         <Route path='/userDashboard' element={<DashboardUser/>}/>
         <Route path='/addPost' element={<AddPosts/>}/>
-        <Route path='/editPost' element={<EditPost/>}/>
+        <Route path='/editPost/:id' element={<EditPost/>}/>
         <Route path='/allPost' element={<AllPost/>}/>
         <Route path='/weatherForecast' element={<WeatherForecast/>}/>
         <Route path='/Forecaste' element={<Forecasting/>}/>
