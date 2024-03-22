@@ -133,6 +133,7 @@ function Forecasting() {
 
   useEffect(()=>{
     fetchOnehour()
+    fetchHourlyforecast()
   },[])
 
   return (
@@ -142,7 +143,7 @@ function Forecasting() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="One Hour Forecast" {...a11yProps(0)} />
-          <Tab onClick={fetchHourlyforecast} label="Hourly Forecast" {...a11yProps(1)} />
+          <Tab  label="Hourly Forecast" {...a11yProps(1)} />
           <Tab onClick={fetchOnedayforecast} label="One Day Forecast" {...a11yProps(2)} />
           <Tab onClick={fetchFivedayforecast} label="Five Day Forecast" {...a11yProps(3)} />
         </Tabs>
@@ -168,7 +169,7 @@ function Forecasting() {
               <StyledTableCell component="th" scope="row">
                 {onehourWeather.DateTime}
               </StyledTableCell>
-              <StyledTableCell align="right"> {onehourWeather.Temperature.Value} {onehourWeather.Temperature.Unit }</StyledTableCell>
+              <StyledTableCell align="right">{onehourWeather.Temperature.Value} {onehourWeather.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right"> {onehourWeather.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.IsDaylight.toString()}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.HasPrecipitation.toString()}</StyledTableCell>
@@ -205,7 +206,7 @@ function Forecasting() {
               <StyledTableCell align="right">{hourlyData.Temperature.Value} {hourlyData.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.HasPrecipitation.toString()}</StyledTableCell>
-              <StyledTableCell align="right">{hourlyData. PrecipitationProbability}</StyledTableCell>
+              <StyledTableCell align="right">{hourlyData.PrecipitationProbability}</StyledTableCell>
             </StyledTableRow>
           )):<div>
             <h5 className='my-2'>Api key expired</h5>
