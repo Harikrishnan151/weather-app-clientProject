@@ -44,7 +44,7 @@ const AddPosts=async(e)=>{
     Authorization: `Bearer ${token}`
   }
   const formData = new FormData()
-  formData.append("user",postDetails.user)
+  formData.append("user",userID)
   formData.append("title",postDetails.title)
   formData.append("description",postDetails.description)
   formData.append("location",postDetails.location)
