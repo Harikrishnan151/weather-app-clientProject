@@ -9,7 +9,8 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background:url('https://www.hdwallpapers.in/download/sunset_minimal_landscape_4k-HD.jpg') ;
+        /* background:url('https://www.hdwallpapers.in/download/sunset_minimal_landscape_4k-HD.jpg') ; */
+        background: linear-gradient(to bottom right, #0597f2, #3b82f6);
     background-size: cover;
     background-position: center;
         

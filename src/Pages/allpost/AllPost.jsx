@@ -58,7 +58,7 @@ function AllPost() {
           <div className="col-2"></div>
           <div className="col-8">
             {
-              weatherPost.map((data)=>(
+            weatherPost?weatherPost.map((data)=>(
                 <MDBCard className='card my-5'>
                   <MDBCardTitle className='text-dark mt-2 mx-2'>{data.user}</MDBCardTitle>
                   <MDBCardText className='mx-2' >
@@ -118,7 +118,9 @@ function AllPost() {
   
                 </MDBCardBody>
               </MDBCard>
-              ))
+              )):<div>
+                <h4>Add post</h4>
+              </div>
             }
 
           </div>

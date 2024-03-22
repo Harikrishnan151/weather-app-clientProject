@@ -251,7 +251,7 @@ function DashboardUser() {
               </Col>
             )):
             <div className="container">
-              
+              <h5>no post available</h5>
             </div>
 
 

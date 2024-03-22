@@ -115,13 +115,7 @@ function Landingpage() {
                   </div>
                 </div>
             }
-
-
-
-
           </div>
-
-
 
         </div>
       </div>

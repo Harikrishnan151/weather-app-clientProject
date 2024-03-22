@@ -7,21 +7,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import { IoLocation } from "react-icons/io5";
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from '../navbar/Navbar';
-import { userPost } from '../../services/allApi';
-import { useParams } from 'react-router-dom';
+import { editUserpost, userPost } from '../../services/allApi';
+import {  useNavigate, useParams } from 'react-router-dom';
 function EditPost() {
 
+  const navigate=useNavigate()
   const {id}=useParams()
   console.log(id);
 
-  const formData=useState({
+  const [formData,setFormData]=useState({
     title:"",
     description:"",
     location:"",
-    user:"",
-
+    user:""
   })
 
+  const [image,setImage]=useState()
+  
+  
   const token = localStorage.getItem("token")
   console.log(token);
 
@@ -33,10 +36,49 @@ function EditPost() {
     }
     const response=await userPost(id,header)
     console.log(response);
+    setFormData({
+      title:response.data.title || '',
+      description:response.data.description || '',
+      location:response.data.location || '',
+      user:response.data.user || ''
+    })
+    setImage(response.data.image)
+
   }
 
   //function to edit user post
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    setFormData({
+      ...formData,[name]:value
+    })
+  }
 
+  const handleSubmit=async()=>{
+    const tokens = localStorage.getItem("token")
+    console.log(tokens);
+    const headers = {
+      Authorization: `Bearer ${token}`
+    }
+    const newFormData=new FormData()
+    newFormData.append("user",formData.user)
+    newFormData.append("title",formData.title)
+    newFormData.append("description",formData.description)
+    newFormData.append("location",formData.location)
+    newFormData.append("image",image)
+
+    const response=await editUserpost(id,newFormData,headers)
+    console.log(response)
+  
+    if(response.status===200){
+      toast.success('Post updated successfully')
+      setTimeout(() => {
+        navigate('/home')
+      }, 3000);
+    }else{
+      alert('*Upload Image mandatory ')
+    }
+  }
   useEffect(()=>{
     fetchUserPost()
   },[])
@@ -49,32 +91,34 @@ function EditPost() {
         <div className='editPost'>
         <div className='wrapper'>
 
-          <form action="">
+          <form >
 
             <h1>Edit Post</h1>
+
             <div className='input-box2'>
-              <input type="text" name='firstname'  placeholder='Id' required />
+              <input onChange={handleChange} value={formData.user} disabled type="text" name='user'  placeholder='Id' required />
               <MdOutlineTitle className='icon' />
             </div>
 
             <div className='input-box2'>
-              <input type="text" name='firstname'  placeholder='Title' required />
+              <input onChange={handleChange} value={formData.title} type="text" name='title'  placeholder='Title' required />
               <MdOutlineTitle className='icon' />
             </div>
             <div className='input-box2'>
-              <input type="" name='lastname' placeholder='Description' required />
+              <input onChange={handleChange} value={formData.description} type="" name='description' placeholder='Description' required />
               <MdOutlineDescription className='icon' />
               
             </div>
             <div className='input-box2'>
-              <input type="text" placeholder='Location'  name='Image url' required />
+              <input  onChange={handleChange}value={formData.location} type="text" placeholder='Location'  name='location' required />
               <IoLocation className='icon' />
             </div>
             <div className='input-box3'>
-              <input type="file" placeholder='Image Url'  name='Image url' required />
-              {/* <FaImage className='icons'/> */}
+             
+              <input  onChange={(e)=>setImage(e.target.files[0])}  type="file" placeholder='Image Url'  name='image' required />
+             
             </div>
-            <button type='submit' >Update</button>
+            <button onClick={handleSubmit} type='submit' >Update</button>
 
 
           </form>
@@ -84,6 +128,7 @@ function EditPost() {
         <ToastContainer position='top-center' />
         </div>
 
+      
 
     </div>
     

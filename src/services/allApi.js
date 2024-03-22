@@ -112,9 +112,9 @@ export const userPost=async(id,header)=>{
     return commonRequest('GET',`${BASE_URL}posts/${id}/`,"",header)
 }
 //Api to edit user post
-// export const editUserpost=async(id,body,headers)=>{
-//     return commonRequest("PUT",`${BASE_URL}posts/${id}/`,body,headers)
-// }
+export const editUserpost=async(id,body,headers)=>{
+    return commonRequest("PUT",`${BASE_URL}posts/${id}/`,body,headers)
+}
 
 export const getSingleEmergency=async(id,header)=>{
     return commonRequest("GET",`${BASE_URL}emergencies/${id}/`,"",header)
