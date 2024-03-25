@@ -6,7 +6,29 @@ import './AdminMain.css'
 import EmergencyView from '../AdminEmergency/EmergencyView';
 import EmergencyAdd from '../AdminEmergency/EmergencyAdd';
 import { Navigate, useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBCollapse,
+  MDBIcon,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from 'mdb-react-ui-kit';
+import { IoMdPhotos } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { MdEmergencyShare } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
 
 function Admin({children}) {
 
@@ -29,6 +51,8 @@ function Admin({children}) {
     e.preventDefault()
     setview(false)
     setEmergency(prevState => !prevState)
+  
+
 
   }
 
@@ -56,6 +80,32 @@ function Admin({children}) {
   },[])
 
   return (
+<div>
+{/* header */}
+<div>
+       <MDBNavbar expand='lg' className='navbar'>
+      <MDBContainer fluid>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        <MDBNavbarToggler style={{color:'white'}}
+          type='button'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <MDBIcon icon='bars' fas />
+        </MDBNavbarToggler>
+        <MDBCollapse  navbar >
+          <MDBNavbarNav className="justify-content-end me-5">
+            
+            
+
+           
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
+ 
+    </div>
+
     <div className='dashboard'>
 
     <div className='menu'>
@@ -93,6 +143,8 @@ function Admin({children}) {
        {addEmergency?<EmergencyAdd></EmergencyAdd>:""}
       </div>
     </div>
+  </div>
+  <Footer></Footer>
   </div>
 )
   

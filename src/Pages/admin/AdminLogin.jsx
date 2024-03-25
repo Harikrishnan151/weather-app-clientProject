@@ -28,7 +28,7 @@ function AdminLogin({children}) {
         const response=await adminLogin(body)
         localStorage.setItem("adminUser",response.data.superuser.id)
         console.log(response.data.superuser);
-        if(response.status===200){
+        if(response.status==200){
           localStorage.setItem("token",response.data.token)
           toast.success('Login Success') 
           setTimeout(()=>{
