@@ -11,7 +11,7 @@ import BASE_URL from '../../services/baseurl';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
-
+import { MdDelete } from "react-icons/md";
 const style = {
   position: 'absolute',
   top: '50%',
@@ -110,7 +110,7 @@ useEffect(()=>{
       </CardContent>
       <CardActions>
         <Link to={`/EmergencySingleView/${i.id}`}><Button size="small">Edit</Button></Link>
-        <Button onClick={()=>DeleteEmergency(i.id)} size="small">Delete</Button>
+        <Button className='text-danger' onClick={()=>DeleteEmergency(i.id)} size="small">Delete</Button>
       </CardActions>
     </Card>
         

@@ -40,6 +40,7 @@ const AddPosts=async(e)=>{
   console.log(postDetails)
   e.preventDefault()
   const token=localStorage.getItem("token")
+  
   const headers = {
     Authorization: `Bearer ${token}`
   }

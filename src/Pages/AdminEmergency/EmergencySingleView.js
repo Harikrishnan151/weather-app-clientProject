@@ -46,6 +46,8 @@ function EmergencySingleView() {
             Authorization: `api-key ${token}`,
              'Content-Type': 'multipart/form-data' 
         }
+
+        
         //api to update
 const response = await updateEmergencyData(id,formdata,header)
        console.log(response);
@@ -128,6 +130,7 @@ const response = await updateEmergencyData(id,formdata,header)
                     <Col sm={7}>
                         <Form.Control type="text"
                             name='admin_user'
+                            disabled
                             value={formData.admin_user}
                             onChange={handleChange} placeholder="" />
                     </Col>
