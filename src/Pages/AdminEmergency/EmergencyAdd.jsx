@@ -40,6 +40,7 @@ function EmergencyAdd() {
 
   {e.preventDefault()
     console.log(data);
+
   console.log(image);
   const token = localStorage.getItem('token')
   console.log(token);

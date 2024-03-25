@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RiAdminLine } from "react-icons/ri";
 import { BiHome } from "react-icons/bi";
 import './Sidebar.css'
@@ -8,7 +8,7 @@ import EmergencyAdd from '../AdminEmergency/EmergencyAdd';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
-function Admin() {
+function Admin({children}) {
 
   const [view,setview]=useState(false)
   const [addEmergency,setEmergency]=useState(false)
