@@ -111,8 +111,8 @@ function Forecasting() {
   const fetchOnedayforecast=async()=>{
     try {
       const data=await onedayWeatherForecast()
-      console.log(data);
-      setOnday(data)
+      console.log(data.data);
+      setOnday(data.data)
     } catch (error) {
       alert('faild to fetch one day weather forecast')
     }
@@ -123,17 +123,19 @@ function Forecasting() {
   const fetchFivedayforecast=async()=>{
   try {
     const weatherData=await fivedayForecast()
-    console.log(weatherData);
-    setFiveday(weatherData)
+    console.log(weatherData.data);
+    setFiveday(weatherData.data)
   
   } catch (error) {
     alert('faild to fetch five day weather forecast')
   }
+
   }
+  console.log(fiveday);
 
   useEffect(()=>{
     fetchOnehour()
-    fetchHourlyforecast()
+    
   },[])
 
   return (
@@ -143,7 +145,7 @@ function Forecasting() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="One Hour Forecast" {...a11yProps(0)} />
-          <Tab  label="Hourly Forecast" {...a11yProps(1)} />
+          <Tab onClick={fetchHourlyforecast}  label="Hourly Forecast" {...a11yProps(1)} />
           <Tab onClick={fetchOnedayforecast} label="One Day Forecast" {...a11yProps(2)} />
           <Tab onClick={fetchFivedayforecast} label="Five Day Forecast" {...a11yProps(3)} />
         </Tabs>
@@ -198,7 +200,7 @@ function Forecasting() {
         </TableHead>
         <TableBody>
           {
-          hourly?((hourlyData) => (
+          hourly?hourly.map((hourlyData) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
                 {hourlyData.DateTime}
@@ -230,17 +232,21 @@ function Forecasting() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(() => (
+          {
+          onday?onday.map((onedayWeather) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {}
+                {onedayWeather.Date}
               </StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
+              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
+              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
+              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
+              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          )):<div>
+          <h5 className='my-2'>Api key expired</h5>
+        </div>
+          }
         </TableBody>
       </Table>
     </TableContainer>
@@ -259,17 +265,21 @@ function Forecasting() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {(() => (
+          {
+          fiveday?fiveday.map((fivedayWeather) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {}
+                {fivedayWeather.date}
               </StyledTableCell>
               <StyledTableCell align="right">{}</StyledTableCell>
               <StyledTableCell align="right">{}</StyledTableCell>
               <StyledTableCell align="right">{}</StyledTableCell>
               <StyledTableCell align="right">{}</StyledTableCell>
             </StyledTableRow>
-          ))}
+          )):<div>
+          <h5 className='my-2'>Api key expired</h5>
+        </div>
+          }
         </TableBody>
       </Table>
     </TableContainer>

@@ -47,6 +47,8 @@ function App() {
         <Route path='/Forecaste' element={<Forecasting/>}/>
         <Route path='/Reset-Password' element={<ResetPassword/>}/>
         <Route path='/EmergencySingleView/:id' element={<EmergencySingleView/>}></Route>
+        {/* <Route path='/EditUserPost/:id' element={<EditUserPost/>}></Route> */}
+
       </Routes>
       
      
