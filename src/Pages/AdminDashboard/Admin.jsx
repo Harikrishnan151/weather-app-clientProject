@@ -12,6 +12,11 @@ function Admin() {
 
   const [view,setview]=useState(false)
   const [addEmergency,setEmergency]=useState(false)
+
+  const pageload =()=>{
+    setview(true);
+    setEmergency(false)
+  }
   const navigate = useNavigate()
 
   const viewEmergency=(e)=>{
@@ -46,6 +51,7 @@ function Admin() {
 
   useEffect(()=>{
  invalidLogin()
+ pageload()
 
   },[])
 

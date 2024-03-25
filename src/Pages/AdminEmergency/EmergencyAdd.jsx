@@ -4,9 +4,14 @@ import './Emergency.css'
 import Button from 'react-bootstrap/Button';
 import { Col, Row } from 'react-bootstrap';
 import { addEmergency } from '../../services/allApi';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import EmergencyView from './EmergencyView';
 
 function EmergencyAdd() {
 
+  const [view,setview]=useState(false)
+  const navigate = useNavigate()
   const [data,setdata]=useState(
     {
       
@@ -19,6 +24,9 @@ function EmergencyAdd() {
       admin_user:''
   }
   )
+  const admin_user= localStorage.getItem('adminUser')
+  console.log(admin_user);
+ 
   const [image,setimage]=useState()
   
   const  handleChange=(e)=>{
@@ -28,8 +36,10 @@ function EmergencyAdd() {
    
   }
 
-  const handleSubmit = async()=>
-  {console.log(data);
+  const handleSubmit = async(e)=>
+
+  {e.preventDefault()
+    console.log(data);
   console.log(image);
   const token = localStorage.getItem('token')
   console.log(token);
@@ -40,7 +50,7 @@ function EmergencyAdd() {
   formData.append("location",data.location)
   formData.append("description",data.description)
   formData.append("phone_number",data.phone_number)
-  formData.append("admin_user",data.admin_user)
+  formData.append("admin_user",admin_user)
   formData.append("image",image)
   // console.log(formData);
 
@@ -50,6 +60,16 @@ function EmergencyAdd() {
 }
  const response = await  addEmergency(formData,header)
  console.log(response);
+ if(response.status==201){
+toast.success("Post added successfully")
+setview(true)
+ }
+
+ else{
+  alert("error please add again")
+  setview(true)
+ }
+
 }
 
 
@@ -66,6 +86,8 @@ function EmergencyAdd() {
         <Col sm={7}>
           <Form.Control type="text"
           name='admin_user'
+          value={admin_user}
+          disabled
           onChange={handleChange} placeholder="" />
         </Col>
       </Form.Group>
@@ -134,6 +156,10 @@ function EmergencyAdd() {
      <div>
      <Button type='submit'  className='w-25 mt-5'  onClick={handleSubmit} variant="success">Submit</Button>{' '}
      </div>
+     <ToastContainer position='top-center' />
+<div>
+{view?<EmergencyView/>:""}
+</div>
     </div>
   )
 }
