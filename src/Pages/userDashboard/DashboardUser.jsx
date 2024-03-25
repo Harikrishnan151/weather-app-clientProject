@@ -208,7 +208,7 @@ function DashboardUser() {
       <div className='container'>
         <Row >
           {
-           userPost?userPost.map((postData) => (
+           userPost.length>0?userPost.map((postData) => (
               <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
 
                 <Link style={{ textDecoration: 'none' }}>
@@ -249,15 +249,12 @@ function DashboardUser() {
 
 
               </Col>
-            )):
-            <div className="container">
-              <h5>no post available</h5>
+            )):<div className='new-box'>
+              <h4>Welcome {user.first_name}</h4>
+
             </div>
 
-
           }
-
-
         </Row>
 
         <div>

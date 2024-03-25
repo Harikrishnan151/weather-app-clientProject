@@ -43,3 +43,6 @@
     justify-content: space-between;
     align-items: center;
 }
+.new-box{
+    height: 90vh;
+}

@@ -77,7 +77,7 @@ const AddPosts=async(e)=>{
         {/* <Navbar/> */}
 
         <div className='Addpost'>
-        <div className='wrappers'>
+        <div className='wrappers1'>
 
           <form  >
 
