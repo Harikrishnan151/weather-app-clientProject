@@ -24,7 +24,7 @@ import EmergencySingleView from './Pages/AdminEmergency/EmergencySingleView';
 
 
 function App() {
-  const token = localStorage.getItem('token')
+// const token = localStorage.getItem('token')
   // const {authorizsed} = useContext(AuthContextStatus)
 
   return (
@@ -35,10 +35,10 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/userLogin' element={<UserLogin/>}/>
         <Route path='/userRegister' element={<UserRegister/>}/>
-        <Route path='/adminLogin' element={token?<Admin/>:<AdminLogin/>}/>
         {/* <Route path='/AdminDashboard' element={<AdminDashboard/>}/> */}
         <Route path='/adminDashboard' element={<Admin/>}></Route>
-        
+        <Route path='/adminLogin' element={<AdminLogin/>}/>
+
          <Route path='/emergency' element={<Emergency/>}/>
         <Route path='/home' element={<Landingpage/>}/>
         <Route path='/userEmergency' element={<UserEmergecy/>}/>

@@ -30,6 +30,8 @@ function AdminLogin({children}) {
         console.log(response.data.superuser);
         if(response.status==200){
           localStorage.setItem("token",response.data.token)
+         
+         
           toast.success('Login Success') 
           setTimeout(()=>{
             navigate('/adminDashboard')
