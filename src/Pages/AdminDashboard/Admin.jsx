@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RiAdminLine } from "react-icons/ri";
 import { BiHome } from "react-icons/bi";
 import './Sidebar.css'
@@ -6,12 +6,39 @@ import './AdminMain.css'
 import EmergencyView from '../AdminEmergency/EmergencyView';
 import EmergencyAdd from '../AdminEmergency/EmergencyAdd';
 import { Navigate, useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBCollapse,
+  MDBIcon,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from 'mdb-react-ui-kit';
+import { IoMdPhotos } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+import { MdEmergencyShare } from "react-icons/md";
+import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
 
-function Admin() {
+function Admin({children}) {
 
   const [view,setview]=useState(false)
   const [addEmergency,setEmergency]=useState(false)
+
+  const pageload =()=>{
+    setview(true);
+    setEmergency(false)
+  }
   const navigate = useNavigate()
 
   const viewEmergency=(e)=>{
@@ -24,6 +51,8 @@ function Admin() {
     e.preventDefault()
     setview(false)
     setEmergency(prevState => !prevState)
+  
+
 
   }
 
@@ -46,10 +75,37 @@ function Admin() {
 
   useEffect(()=>{
  invalidLogin()
+ pageload()
 
   },[])
 
   return (
+<div>
+{/* header */}
+<div>
+       <MDBNavbar expand='lg' className='navbar'>
+      <MDBContainer fluid>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'><img height={'30px'} src='https://i.postimg.cc/hPXvxcnQ/cloudy.png'/>Weather-App</MDBNavbarBrand>
+        <MDBNavbarToggler style={{color:'white'}}
+          type='button'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <MDBIcon icon='bars' fas />
+        </MDBNavbarToggler>
+        <MDBCollapse  navbar >
+          <MDBNavbarNav className="justify-content-end me-5">
+            
+            
+
+           
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
+ 
+    </div>
+
     <div className='dashboard'>
 
     <div className='menu'>
@@ -87,6 +143,8 @@ function Admin() {
        {addEmergency?<EmergencyAdd></EmergencyAdd>:""}
       </div>
     </div>
+  </div>
+  <Footer></Footer>
   </div>
 )
   

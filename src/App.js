@@ -15,7 +15,7 @@ import AllPost from './Pages/allpost/AllPost';
 import WeatherForecast from './Pages/weatherForecast/WeatherForecast';
 import Forecasting from './Pages/forecasting/Forecasting';
 // import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
-import Admin from './Pages/AdminDashboard/Admin'
+import Admin from './Pages/AdminDashBoard/Admin'
 import UserEmergecy from './Pages/userEmergency/UserEmergecy';
 import ResetPassword from './Pages/resetpassword/ResetPassword';
 import EmergencySingleView from './Pages/AdminEmergency/EmergencySingleView';
@@ -25,7 +25,9 @@ import EditUser from './Pages/EditUserDetails/EditUser';
 
 
 function App() {
+// const token = localStorage.getItem('token')
   // const {authorizsed} = useContext(AuthContextStatus)
+
   return (
     <div className="App">
      
@@ -34,9 +36,10 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/userLogin' element={<UserLogin/>}/>
         <Route path='/userRegister' element={<UserRegister/>}/>
-        <Route path='/adminLogin' element={<AdminLogin/>}/>
         {/* <Route path='/AdminDashboard' element={<AdminDashboard/>}/> */}
         <Route path='/adminDashboard' element={<Admin/>}></Route>
+        <Route path='/adminLogin' element={<AdminLogin/>}/>
+
          <Route path='/emergency' element={<Emergency/>}/>
         <Route path='/home' element={<Landingpage/>}/>
         <Route path='/userEmergency' element={<UserEmergecy/>}/>

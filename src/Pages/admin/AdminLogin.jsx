@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import './Admin.css'
 import { FaUser } from "react-icons/fa";
 import { IoIosLock } from "react-icons/io";
@@ -7,7 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { adminLogin } from '../../services/allApi';
 
-function AdminLogin() {
+function AdminLogin({children}) {
+    
 
     const [username,setUserName]=useState()
     const [password,setPassword]=useState()
@@ -25,8 +26,12 @@ function AdminLogin() {
       }else{
         //api call for admin login
         const response=await adminLogin(body)
-        if(response.status===200){
+        localStorage.setItem("adminUser",response.data.superuser.id)
+        console.log(response.data.superuser);
+        if(response.status==200){
           localStorage.setItem("token",response.data.token)
+         
+         
           toast.success('Login Success') 
           setTimeout(()=>{
             navigate('/adminDashboard')
@@ -43,6 +48,8 @@ function AdminLogin() {
         toast.error('Internal server error')
       }
     }
+
+    
 
   return (
     
