@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Navbar from '../navbar/Navbar';
-
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -79,7 +78,9 @@ function Forecasting() {
 
   const [oneHour,setOnehour]=useState([])
   const [hourly,setHourly]=useState([])
-  const [onday,setOnday]=useState([])
+  const [onday,setOnday]=useState({
+
+  })
   const [fiveday,setFiveday]=useState([])
  
 
@@ -112,7 +113,7 @@ function Forecasting() {
     try {
       const data=await onedayWeatherForecast()
       console.log(data.data);
-      setOnday(data.data)
+      setOnday(data)
     } catch (error) {
       alert('faild to fetch one day weather forecast')
     }
@@ -169,7 +170,7 @@ function Forecasting() {
            oneHour?oneHour.map((onehourWeather) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {onehourWeather.DateTime}
+                {onehourWeather.DateTime.slice(8,10)}-{onehourWeather.DateTime.slice(5,8)}{onehourWeather.DateTime.slice(0,4)}
               </StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.Temperature.Value} {onehourWeather.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right"> {onehourWeather.IconPhrase}</StyledTableCell>
@@ -232,7 +233,7 @@ function Forecasting() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {
+          {/* {
           onday?onday.map((onedayWeather) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
@@ -246,7 +247,7 @@ function Forecasting() {
           )):<div>
           <h5 className='my-2'>Api key expired</h5>
         </div>
-          }
+          } */}
         </TableBody>
       </Table>
     </TableContainer>

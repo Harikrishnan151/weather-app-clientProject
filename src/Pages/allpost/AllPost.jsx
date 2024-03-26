@@ -15,15 +15,19 @@ import { FaCommentAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { getAllWeatherpost } from '../../services/allApi';
+import { getAllWeatherpost, searchPost } from '../../services/allApi';
 import BASE_URL from '../../services/baseurl';
+import { MDBInput } from 'mdb-react-ui-kit';
+import { MDBBtn } from 'mdb-react-ui-kit';
+import { FaSearch } from "react-icons/fa";
 // import moment from 'moment';
 
 
 function AllPost() {
 
   const [addvalue, setComment] = useState(false)
-  const [newDate,setNewdate]=useState()
+  const [search,setSearch]=useState('')
+
   //Add comment toggle comment box display using comment link clicks
 
   const addComment = () => {
@@ -36,14 +40,12 @@ function AllPost() {
   const fetchWeatherPost = async () => {
     const response = await getAllWeatherpost()
     setWeatherpost(response.data)
-    // const date=moment(response.data.created_at)
 
-    // const formattedDate=date.format('DD-MM-YYYY')
-    // setNewdate(formattedDate)
   }
   console.log(weatherPost)
 
-
+//Function to search user post based on location
+   const filterData=weatherPost.filter(items=>items.location.toLowerCase().includes(search.toLowerCase()))
 
   useEffect(() => {
     fetchWeatherPost()
@@ -54,16 +56,24 @@ function AllPost() {
     <div className='mainBody'>
       <Navbar />
       <div className="container">
+        <div className='searchBar my-4'>
+        
+        <MDBInput onChange={(e)=>setSearch(e.target.value)} label='Search by location' id='form1' type='text' />
+        <MDBBtn type='submit' color='info'>
+        <FaSearch />
+      </MDBBtn>
+     
+        </div>
         <div className="row">
           <div className="col-2"></div>
           <div className="col-8">
             {
-            weatherPost?weatherPost.map((data)=>(
+            filterData.length>0?filterData.map((data)=>(
                 <MDBCard className='card my-5'>
-                  <MDBCardTitle className='text-dark mt-2 mx-2'>{data.user}</MDBCardTitle>
+                  <MDBCardTitle className='text-dark mt-2 mx-2'><img style={{ width: '1.2rem', height: '1.2rem;', overflow: 'hidden' }} src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="" /> {data.user}</MDBCardTitle>
                   <MDBCardText className='mx-2' >
                     {/* {data.created_at.slice(0,10)}  */}
-                    {data.created_at.slice(8,10)}-{data.created_at.slice(5,8)}{data.created_at.slice(0,4)}
+                    <FaLocationDot  /> {data.location}                   
                   {/* {newDate} */}
                   </MDBCardText>
                 <MDBCardImage height={'450px'} className='' src={`${BASE_URL}${data.image}`} position='top' alt='...' />
@@ -73,7 +83,9 @@ function AllPost() {
                     {data.description} 
                   </MDBCardText>
                   <MDBCardText >
-                    <FaLocationDot  /> {data.location}
+                  {data.created_at.slice(8,10)}-{data.created_at.slice(5,8)}{data.created_at.slice(0,4)}
+
+                   
                   </MDBCardText>
                   <div className='bottom-content d-flex justify-content-between '>
                     <div className="action-item">
@@ -118,8 +130,8 @@ function AllPost() {
   
                 </MDBCardBody>
               </MDBCard>
-              )):<div>
-                <h4>Add post</h4>
+              )):<div className='postContainer '>
+                <h4>No Post available</h4>
               </div>
             }
 

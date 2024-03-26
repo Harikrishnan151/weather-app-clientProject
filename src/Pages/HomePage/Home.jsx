@@ -110,7 +110,7 @@ function Home() {
                 </div>
                 :
                 <div className='weather-box'>
-                  <img width={60} src="https://i.postimg.cc/2y9ncR7J/clouds.gif" alt="" />
+                   <img width={40} src="https://cdn-icons-png.flaticon.com/512/1779/1779882.png" alt="" />
                   <div>
                     <h5 className='content'>Introducing our weather app, your ultimate companion for both emergencies and daily forecasts. Stay ahead with real-time updates, detailed hourly forecasts.</h5>
                   </div>

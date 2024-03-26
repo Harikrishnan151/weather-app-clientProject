@@ -9,10 +9,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        background:url('https://wallpapersmug.com/download/2560x1440/a56dc8/horizon-moon-mountains-digital-art.jpg') ;
-    background-size: cover;
-    background-position: center;
+        min-height: 105vh;
+        /* background:url('https://images.pexels.com/photos/912364/pexels-photo-912364.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') ; */
+        background: linear-gradient(to bottom right, #0597f2, #bed2f2);
+        background-size: cover;
+        background-position: center;
         
     
     

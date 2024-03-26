@@ -5,12 +5,11 @@ import {
     MDBCardBody,
     MDBCardTitle,
     MDBCardText,
-    MDBBtn
 } from 'mdb-react-ui-kit';
 import { MDBInput } from 'mdb-react-ui-kit';
 import { resetPassword } from '../../services/allApi';
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ResetPassword() {
 
@@ -43,13 +42,13 @@ function ResetPassword() {
     return (
         <div>
             <Navbar />
-            <div className="container my-5">
-                <div className="box my-5">
+            <div  className="container my-5">
+                <div  className="box my-5">
                     <MDBCard>
                         <MDBCardBody>
                             <MDBCardTitle className='text-center'>Reset Password</MDBCardTitle>
                             <MDBCardText>
-                            <form onSubmit={resetuserPassword}>
+                            <form  onSubmit={resetuserPassword}>
                 <div class="form-outline" data-mdb-input-init>
                 <MDBInput label='Username' onChange={(e)=>setUsername(e.target.value)} id='formControlLg' type='text' size='lg' />
                  
@@ -63,6 +62,8 @@ function ResetPassword() {
                
               
                 <div className='my-2 text-center'>
+                <Link to={'/UserDashboard'}> <button  className='btn  mx-5'>Back</button></Link> 
+
                   <button type='submit' className='btn btn-primary'>Submit</button>
                 </div>
                 </form>

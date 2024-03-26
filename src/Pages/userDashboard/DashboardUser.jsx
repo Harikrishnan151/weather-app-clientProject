@@ -65,7 +65,7 @@ function DashboardUser() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState([])
   const [userPost, setUserpost] = useState([])
   const [userBadges,setUserBadge]=useState([])
 
@@ -86,6 +86,7 @@ function DashboardUser() {
 
 
   const navigate = useNavigate()
+
   // api to fetch user details
   const fetchDetails = async () => {
 
@@ -197,6 +198,7 @@ function DashboardUser() {
                 <ListGroup.Item className='listgrp text-black '>Dashboard</ListGroup.Item>
               </Link>
               <Link to={'/addPost'}><ListGroup.Item className='listgrp text-black '>Add Posts</ListGroup.Item></Link>
+              <Link to={`/Edit-user/:id`}><ListGroup.Item className='listgrp text-black'>Edit User Details</ListGroup.Item> </Link>
               <Link to={'/Reset-Password'}><ListGroup.Item className='listgrp text-black'>Reset Password</ListGroup.Item> </Link>
               <ListGroup.Item onClick={() => logoutUser()} className='listgrp text-black '>Log Out</ListGroup.Item>
 

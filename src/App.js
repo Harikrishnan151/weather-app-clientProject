@@ -19,6 +19,7 @@ import Admin from './Pages/AdminDashboard/Admin'
 import UserEmergecy from './Pages/userEmergency/UserEmergecy';
 import ResetPassword from './Pages/resetpassword/ResetPassword';
 import EmergencySingleView from './Pages/AdminEmergency/EmergencySingleView';
+import EditUser from './Pages/EditUserDetails/EditUser';
 // import { AuthContextStatus } from './Pages/AuthContext';
 
 
@@ -47,7 +48,7 @@ function App() {
         <Route path='/Forecaste' element={<Forecasting/>}/>
         <Route path='/Reset-Password' element={<ResetPassword/>}/>
         <Route path='/EmergencySingleView/:id' element={<EmergencySingleView/>}></Route>
-        {/* <Route path='/EditUserPost/:id' element={<EditUserPost/>}></Route> */}
+        <Route path='/Edit-user/:id' element={<EditUser/>}></Route>
 
       </Routes>
       

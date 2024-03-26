@@ -6,19 +6,17 @@
     box-sizing:border-box;
     }
     
-    .userRegister{
+.userRegisteration{
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background:url('https://i.postimg.cc/pr0XLHCC/background.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-        
-    
+        background:url('https://th.bing.com/th/id/R.08a1fb06aa666cea4df7e9db26b90ec5?rik=70cQa%2bmQaLJzHQ&riu=http%3a%2f%2f99bricks.net%2fimg%2fbackground.png&ehk=J%2f6f2nL00QG3%2bdaQbWQ5bRVYFdN1OwmdCh9fCGd6JqE%3d&risl=&pid=ImgRaw&r=0') no-repeat;
+        background-size: cover;
+         background-position: center; 
     
     }
-    .wrapper{
+.wrapperReg{
         
         width: 420px;
         border: 2px solid rgba(255,255,255,0.2);
@@ -30,12 +28,12 @@
         box-shadow: 0 0 10px rgba(225,225,225,.2);
     
     }
-    .wrapper h1{
+    .wrapperReg h1{
         font-size: 36px;
         text-align: center;
         
     }
-    .wrapper .input-box5{
+    .wrapperReg .input-box5{
         position: relative;
         width: 100%;
         height: 50px;
@@ -66,10 +64,10 @@
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 16px;
+        font-size: 18px;
     
     }
-    .wrapper .remember-forgot{
+    .wrapperReg .remember-forgot{
         display: flex;
         justify-content: space-between;
         font-size: 14.5px;
@@ -90,7 +88,7 @@
         text-decoration: underline;
     }
     
-    .wrapper button{
+    .wrapperReg button{
         width: 100%;
         height: 45px;
         background: #fff;
@@ -103,7 +101,7 @@
         color: #333;
         font-weight: 700;
     }
-    .wrapper .register-link{
+    .wrapperReg .register-link{
     font-size: 14.5px;
     text-align: center;
     margin: 20px 0 15px;

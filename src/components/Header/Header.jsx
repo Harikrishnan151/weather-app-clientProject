@@ -28,7 +28,8 @@ function Header() {
     <div>
        <MDBNavbar expand='lg' className='navbar'>
       <MDBContainer fluid>
-        <MDBNavbarBrand  className='weather text-light mx-4' href='#'>Weather-App</MDBNavbarBrand>
+        <Link to={'/'}>
+        <MDBNavbarBrand  className='weather text-light mx-4' href='#'><img height={'30px'} src='https://i.postimg.cc/hPXvxcnQ/cloudy.png'/> Weather-App</MDBNavbarBrand> </Link>
         <MDBNavbarToggler style={{color:'white'}}
           type='button'
           aria-expanded='false'

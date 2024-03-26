@@ -5,6 +5,8 @@ import './UserRegister.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { userReg } from '../../services/allApi';
+import { MdEmail } from "react-icons/md";
+import { IoPersonCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 function UserRegister() {
 
@@ -18,30 +20,6 @@ function UserRegister() {
   const [confirmPwd, setConfirmpsw] = useState()
   const navigate=useNavigate()
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const body = { first_name,last_name, username, email, password };
-  //   console.log(username, password, email, first_name,last_name);
-  //   try {
-  //     const response = await userReg(body);
-  //     console.log(response.response.status);
-      
-  //     if (response.status === 201) {
-  //       toast.success(response.status);
-  //       setTimeout(() => {
-  //         navigate('/userLogin');
-  //       }, 3000);
-  //     }else if(response.response.status === 400 ){
-  //       toast.error("Account already exist")
-  //     }else{
-  //       toast.error("Internal error")
-  //     }
-  //   } catch (error) {
-  //     toast.error("Registration Failed");
-  //     console.error("Error:", error);
-  //   }
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,8 +51,8 @@ function UserRegister() {
     // user register form
     <>
       
-      <div className='userRegister'>
-        <div className='wrapper'>
+      <div className='userRegisteration'>
+        <div className='wrapperReg'>
 
           <form onSubmit={handleSubmit}>
 
@@ -90,11 +68,11 @@ function UserRegister() {
             </div>
             <div className='input-box5'>
               <input type="text" placeholder='username' onChange={(e) => setUsername(e.target.value)} name='username' required />
-              <FaUser className='icon' />
+              <IoPersonCircle className='icon' />
             </div>
             <div className='input-box5'>
               <input type="email" placeholder='email'onChange={(e) => setEmail(e.target.value)} name='email' required />
-              <IoIosLock className='icon' />
+              <MdEmail  className='icon'/>
             </div>
             <div className='input-box5'>
               <input type="password" placeholder='password'onChange={(e) => setpassword(e.target.value)} name='psw' required />
