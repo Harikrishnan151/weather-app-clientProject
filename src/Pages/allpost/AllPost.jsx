@@ -26,7 +26,7 @@ import { FaSearch } from "react-icons/fa";
 function AllPost() {
 
   const [addvalue, setComment] = useState(false)
-  const [search,setSearch]=useState('')
+  const [search, setSearch] = useState('')
 
   //Add comment toggle comment box display using comment link clicks
 
@@ -44,8 +44,8 @@ function AllPost() {
   }
   console.log(weatherPost)
 
-//Function to search user post based on location
-   const filterData=weatherPost.filter(items=>items.location.toLowerCase().includes(search.toLowerCase()))
+  //Function to search user post based on location
+  const filterData = weatherPost.filter(items => items.location.toLowerCase().includes(search.toLowerCase()))
 
   useEffect(() => {
     fetchWeatherPost()
@@ -57,80 +57,80 @@ function AllPost() {
       <Navbar />
       <div className="container">
         <div className='searchBar my-4'>
-        
-        <MDBInput onChange={(e)=>setSearch(e.target.value)} label='Search by location' id='form1' type='text' />
-        <MDBBtn type='submit' color='info'>
-        <FaSearch />
-      </MDBBtn>
-     
+
+          <MDBInput onChange={(e) => setSearch(e.target.value)} label='Search by location' id='form1' type='text' />
+          <MDBBtn type='submit' color='info'>
+            <FaSearch />
+          </MDBBtn>
+
         </div>
         <div className="row">
           <div className="col-2"></div>
           <div className="col-8">
             {
-            filterData.length>0?filterData.map((data)=>(
+              filterData.length > 0 ? filterData.map((data) => (
                 <MDBCard className='card my-5'>
-                  <MDBCardTitle className='text-dark mt-2 mx-2'><img style={{ width: '1.2rem', height: '1.2rem;', overflow: 'hidden' }} src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="" /> {data.user}</MDBCardTitle>
+                  <MDBCardTitle className='text-dark mt-1 mx-2'><img style={{ width: '1.5rem', height: '1.3rem;', overflow: 'hidden' }} src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="" /> {data.username}</MDBCardTitle>
                   <MDBCardText className='mx-2' >
-                    {/* {data.created_at.slice(0,10)}  */}
-                    <FaLocationDot  /> {data.location}                   
-                  {/* {newDate} */}
-                  </MDBCardText>
-                <MDBCardImage height={'450px'} className='' src={`${BASE_URL}${data.image}`} position='top' alt='...' />
-                <MDBCardBody>
-                  <MDBCardTitle className='text-dark '>{data.title}</MDBCardTitle>
-                  <MDBCardText >
-                    {data.description} 
-                  </MDBCardText>
-                  <MDBCardText >
-                  {data.created_at.slice(8,10)}-{data.created_at.slice(5,8)}{data.created_at.slice(0,4)}
 
-                   
+                    <FaLocationDot /> {data.location}
+
                   </MDBCardText>
-                  <div className='bottom-content d-flex justify-content-between '>
-                    <div className="action-item">
-                      <span><FaHeart className='text-danger' /> {data.likes}  Like</span>
+                  <MDBCardImage height={'450px'} className='postImg' src={`${BASE_URL}${data.image}`} position='top' alt='...' />
+                  <MDBCardBody>
+                    <MDBCardTitle className='text-dark '>{data.title}</MDBCardTitle>
+                    <MDBCardText >
+                      {data.description}
+                    </MDBCardText>
+                    <MDBCardText >
+                      {data.created_at.slice(8, 10)}-{data.created_at.slice(5, 8)}{data.created_at.slice(0, 4)}
+
+
+                    </MDBCardText>
+                    <div className='bottom-content d-flex justify-content-between '>
+                      <div className="action-item">
+                        <span><FaHeart className='text-danger' /> {data.likes}  Like</span>
+                      </div>
+                      <div className="action-item">
+                        <span onClick={addComment}><FaCommentAlt />  comments</span>
+                      </div>
                     </div>
-                    <div className="action-item">
-                      <span onClick={addComment}><FaCommentAlt /> 4 comments</span>
+                    <div>
+                      {
+                        addvalue ?
+
+                          //  comments display
+
+                          <Card className='mt-5'>
+                            <Card.Body>
+                              <Card.Title>Comments</Card.Title>
+                              <Card.Text>
+                                {/* comment enter field */}
+                                <input type="text" className='input-box' placeholder='Enter your comments here..' />
+
+                              </Card.Text>
+                              {/* button for comments add  */}
+
+                              <Button variant="Success">Add comment</Button>
+
+                              {/* button for comments delete */}
+                              <Button variant="Success" className='ms-3'>Delete comment</Button>
+
+                              {/* display comments loaded from server */}
+                              <div className='input-box mt-5 '>
+                                <p>{data.comments}</p>
+
+                              </div>
+                            </Card.Body>
+                          </Card>
+
+                          : ""
+                      }
                     </div>
-                  </div>
-                  <div>
-                    {
-                      addvalue ?
-  
-                        //  comments display
-  
-                        <Card className='mt-5'>
-                          <Card.Body>
-                            <Card.Title>Comments</Card.Title>
-                            <Card.Text>
-                              {/* comment enter field */}
-                              <input type="text" className='input-box' placeholder='Enter your comments here..' />
-  
-                            </Card.Text>
-                            {/* button for comments add  */}
-  
-                            <Button variant="Success">Add comment</Button>
-  
-                            {/* button for comments delete */}
-                            <Button variant="Success" className='ms-3'>Delete comment</Button>
-  
-                            {/* display comments loaded from server */}
-                            <div className='input-box mt-5 '>
-                              <p>{data.comments}</p>
-                               
-                            </div>
-                          </Card.Body>
-                        </Card>
-  
-                        : ""
-                    }
-                  </div>
-  
-                </MDBCardBody>
-              </MDBCard>
-              )):<div className='postContainer '>
+
+                  </MDBCardBody>
+                </MDBCard>
+              )) : <div className='postContainer '>
                 <h4>No Post available</h4>
               </div>
             }

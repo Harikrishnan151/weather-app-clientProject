@@ -119,6 +119,18 @@ export const editUserpost=async(id,body,headers)=>{
 export const editUserDetails=async(id,body)=>{
     return commonRequest("PUT",`${BASE_URL}users/${id}/`,body)
 }
+
+//Api to get user post individully
+export const viewUserPost=async(id,header)=>{
+    return commonRequest('GET',`${BASE_URL}posts/${id}/`,"",header)
+}
+
+//Api to get comments
+export const getComments=async(id)=>{
+    console.log(id);
+    return commonRequest('GET',`${BASE_URL}posts/${id}/comments/`)
+}
+
 export const getSingleEmergency=async(id,header)=>{
     return commonRequest("GET",`${BASE_URL}emergencies/${id}/`,"",header)
 }

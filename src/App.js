@@ -20,6 +20,7 @@ import UserEmergecy from './Pages/userEmergency/UserEmergecy';
 import ResetPassword from './Pages/resetpassword/ResetPassword';
 import EmergencySingleView from './Pages/AdminEmergency/EmergencySingleView';
 import EditUser from './Pages/EditUserDetails/EditUser';
+import UserPost from './Pages/UserPost/UserPost';
 // import { AuthContextStatus } from './Pages/AuthContext';
 
 
@@ -39,7 +40,6 @@ function App() {
         {/* <Route path='/AdminDashboard' element={<AdminDashboard/>}/> */}
         <Route path='/adminDashboard' element={<Admin/>}></Route>
         <Route path='/adminLogin' element={<AdminLogin/>}/>
-
          <Route path='/emergency' element={<Emergency/>}/>
         <Route path='/home' element={<Landingpage/>}/>
         <Route path='/userEmergency' element={<UserEmergecy/>}/>
@@ -52,6 +52,8 @@ function App() {
         <Route path='/Reset-Password' element={<ResetPassword/>}/>
         <Route path='/EmergencySingleView/:id' element={<EmergencySingleView/>}></Route>
         <Route path='/Edit-user/:id' element={<EditUser/>}></Route>
+        <Route path='/userPost/:id' element={<UserPost/>}></Route>
+
 
       </Routes>
       

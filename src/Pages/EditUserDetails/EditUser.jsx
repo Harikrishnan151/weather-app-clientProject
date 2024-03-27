@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './EditUser.css'
 import Navbar from '../navbar/Navbar'
-import { getUserdetails } from '../../services/allApi'
+import { editUserDetails, getUserdetails } from '../../services/allApi'
 import {
     MDBCard,
     MDBCardBody,
@@ -9,19 +9,23 @@ import {
     MDBCardText,
 } from 'mdb-react-ui-kit';
 import { MDBInput } from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function EditUser() {
+
+    const navigate = useNavigate();
 
     const id = localStorage.getItem("userId")
     console.log(id);
 
     const [formData, setFormData] = useState({
+        username: "",
         first_name: "",
         last_name: "",
-        email: "",
-        username: ""
+        email: ""
+        
     });
 
     //function to fetch user details
@@ -30,7 +34,7 @@ function EditUser() {
             const response = await getUserdetails(id)
             console.log(response.data);
             setFormData({
-                username:response.data.username || '',
+                username:response.data.username|| '',
                 first_name:response.data.first_name || '',
                 last_name:response.data.last_name || '',
                 email:response.data.email || ''
@@ -49,6 +53,22 @@ function EditUser() {
             [name]: value
         });
     };
+  //function to edit user details
+  const handleSubmit=async(e)=>{
+    e.preventDefault(); 
+    const body=formData
+    console.log(body);
+   const response=await editUserDetails(id,body)
+   console.log(response);
+   if (response.status === 200) {
+    toast.success('Post updated successfully');
+    setTimeout(() => {
+        navigate('/userDashboard');
+    }, 2000);
+} else {
+    alert('*Upload Image mandatory');
+}
+  }
 
     useEffect(() => {
         fetchDetails()
@@ -62,9 +82,9 @@ function EditUser() {
                         <MDBCardBody>
                             <MDBCardTitle className='text-center'>Edit User Details</MDBCardTitle>
                             <MDBCardText>
-                                
+                                <form onSubmit={handleSubmit}>
                                 <div class="form-outline my-3" data-mdb-input-init>
-                                    <MDBInput onChange={handleChange} value={formData.username} name='Username' label='Username' id='formControlLg' type='text' size='lg' />
+                                    <MDBInput onChange={handleChange} value={formData.username} name='username' label='Username' id='formControlLg' type='text' size='lg' />
                                 </div>
                                 <div class="form-outline my-3" data-mdb-input-init >
                                     <MDBInput onChange={handleChange} value={formData.first_name} name='first_name' label='First Name' id='formControlLg' type='text' size='lg' />
@@ -80,7 +100,7 @@ function EditUser() {
                               <Link to={'/UserDashboard'}> <button  className='btn  mx-5'>Back</button></Link> 
                                     <button type='submit' className='btn btn-primary'>Submit</button>
                                 </div>
-
+                                </form>
                             </MDBCardText>
                         </MDBCardBody>
                     </MDBCard>
@@ -88,6 +108,8 @@ function EditUser() {
                 </div>
 
             </div>
+            <ToastContainer position='top-center' />
+
         </div>
     )
 }

@@ -158,6 +158,7 @@ function Forecasting() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Date & Time</StyledTableCell>
+            <StyledTableCell align="right">Time</StyledTableCell>
             <StyledTableCell align="right">Tempature</StyledTableCell>
             <StyledTableCell align="right">Weather</StyledTableCell>
             <StyledTableCell align="right">IsDaylight</StyledTableCell>
@@ -172,6 +173,7 @@ function Forecasting() {
               <StyledTableCell component="th" scope="row">
                 {onehourWeather.DateTime.slice(8,10)}-{onehourWeather.DateTime.slice(5,8)}{onehourWeather.DateTime.slice(0,4)}
               </StyledTableCell>
+              <StyledTableCell align="right"> {onehourWeather.DateTime.slice(11)}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.Temperature.Value} {onehourWeather.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right"> {onehourWeather.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.IsDaylight.toString()}</StyledTableCell>
@@ -192,7 +194,8 @@ function Forecasting() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date & Time</StyledTableCell>
+            <StyledTableCell>Date</StyledTableCell>
+            <StyledTableCell align="right">Time</StyledTableCell>
             <StyledTableCell align="right">Tempature</StyledTableCell>
             <StyledTableCell align="right">IsDaylight</StyledTableCell>
             <StyledTableCell align="right">HasPrecipitation</StyledTableCell>
@@ -204,8 +207,11 @@ function Forecasting() {
           hourly?hourly.map((hourlyData) => (
             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {hourlyData.DateTime}
+
+                {hourlyData.DateTime.slice(8,10)}-{hourlyData.DateTime.slice(5,8)}{hourlyData.DateTime.slice(0,4)}
               </StyledTableCell>
+              <StyledTableCell align="right"> {hourlyData.DateTime.slice(11)}</StyledTableCell>
+
               <StyledTableCell align="right">{hourlyData.Temperature.Value} {hourlyData.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.HasPrecipitation.toString()}</StyledTableCell>

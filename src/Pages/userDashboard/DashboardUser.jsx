@@ -67,8 +67,8 @@ function DashboardUser() {
 
   const [user, setUser] = useState([])
   const [userPost, setUserpost] = useState([])
-  const [userBadges,setUserBadge]=useState([])
-
+  const [userBadges, setUserBadge] = useState([])
+  const [userComments, setUserComments] = useState([])
   // function to block invalid user login
   const invalidLogin = () => {
     const token = localStorage.getItem("token")
@@ -120,7 +120,10 @@ function DashboardUser() {
     try {
       const postDetails = await getUserpost(header)
       console.log(postDetails.data)
+      // console.log(postDetails.data.comments)
+
       setUserpost(postDetails.data)
+      setUserComments(postDetails.data)
     } catch (error) {
       alert('error in fetching post')
     }
@@ -136,12 +139,12 @@ function DashboardUser() {
     try {
       const result = await deleteUserpost(id, headers)
       console.log(result)
-     if(result.status===204){
-      toast.success('user post deleted')
-      fetchPost()
-     }else if(result.status===404){
-      toast.error('user not autherized to delete')
-     }
+      if (result.status === 204) {
+        toast.success('user post deleted')
+        fetchPost()
+      } else if (result.status === 404) {
+        toast.error('user not autherized to delete')
+      }
     } catch (error) {
       alert('faild to delete user post')
     }
@@ -150,17 +153,17 @@ function DashboardUser() {
   //function to get user badge
   const user_id = (localStorage.getItem("userId"))
   console.log(user_id);
-  const userBadge=async()=>{
-   try {
-   console.log(user_id);
-    const response=await getUserbadge(user_id)
-    console.log(response);
-    setUserBadge(response.data)
-    
-   } catch (error) {
-    alert('error to fetch user badge ')
-   }
-   console.log(userBadges)
+  const userBadge = async () => {
+    try {
+      console.log(user_id);
+      const response = await getUserbadge(user_id)
+      console.log(response);
+      setUserBadge(response.data)
+
+    } catch (error) {
+      alert('error to fetch user badge ')
+    }
+    console.log(userBadges)
 
   }
 
@@ -190,8 +193,8 @@ function DashboardUser() {
           <Offcanvas.Body>
             <MDBCardImage className='userProfile my-3' style={{ width: '8rem', height: '8rem;', overflow: 'hidden' }} src='https://cdn-icons-png.flaticon.com/512/9131/9131529.png' position='top' alt='...' />
             <div className='userBadge my-3'>
-            <h6>{userBadges.badge}</h6>
-            <img height={'30px'} src={`${BASE_URL}${userBadges.badge_image}`} alt="" />
+              <h6>{userBadges.badge}</h6>
+              <img height={'30px'} src={`${BASE_URL}${userBadges.badge_image}`} alt="" />
             </div>
             <ListGroup>
               <Link to={'/userDashboard'}>
@@ -210,10 +213,10 @@ function DashboardUser() {
       <div className='container'>
         <Row >
           {
-           userPost.length>0?userPost.map((postData) => (
+            userPost.length > 0 ? userPost.map((postData) => (
               <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
 
-                <Link style={{ textDecoration: 'none' }}>
+                <Link to={`/userPost/${postData.id}`} style={{ textDecoration: 'none' }}>
                   <MDBCard className='card mt-5'>
                     <MDBCardImage className='postImg' height={'200px'} src={`${BASE_URL}${postData.image}`} position='top' alt='...' />
                     <MDBCardBody>
@@ -227,7 +230,13 @@ function DashboardUser() {
                           <span><FaHeart className='text-danger' /> {postData.likes} Likes</span>
                         </div>
                         <div className="action-item">
-                          <span><FaCommentAlt />{postData.comments} comments</span>
+                          <span><FaCommentAlt /> {postData.comments.length} comments</span>
+                          <div>
+                          {postData.comments && postData.comments.map((comment, index) => (
+                             <p key={index}>{comment.text}</p>
+                             
+                         ))}
+                          </div>
                         </div>
                       </div>
                       <div className="userActions d-flex justify-content-between mt-2 ">
@@ -239,7 +248,7 @@ function DashboardUser() {
                         </div>
                         <div className="edit">
                           <Link>
-                            <span> <FaTrashCan onClick={()=>deletePost(postData.id)} className='text-danger' /></span>
+                            <span> <FaTrashCan onClick={() => deletePost(postData.id)} className='text-danger' /></span>
                           </Link>
 
                         </div>
@@ -251,7 +260,7 @@ function DashboardUser() {
 
 
               </Col>
-            )):<div className='new-box'>
+            )) : <div className='new-box'>
               <h4>Welcome {user.first_name}</h4>
 
             </div>
