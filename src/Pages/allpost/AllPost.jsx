@@ -15,22 +15,26 @@ import { FaCommentAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { getAllWeatherpost, searchPost } from '../../services/allApi';
+import { addComments, deleteComments, getAllWeatherpost, searchPost } from '../../services/allApi';
 import BASE_URL from '../../services/baseurl';
 import { MDBInput } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { FaSearch } from "react-icons/fa";
-// import moment from 'moment';
+import { FaTrashCan } from "react-icons/fa6";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 function AllPost() {
 
   const [addvalue, setComment] = useState(false)
   const [search, setSearch] = useState('')
+  const [cmtText, setText] = useState()
 
   //Add comment toggle comment box display using comment link clicks
 
   const addComment = () => {
+
     console.log("add comment");
     // setComment(true)
     setComment(prevState => !prevState);
@@ -50,6 +54,71 @@ function AllPost() {
   useEffect(() => {
     fetchWeatherPost()
   }, [])
+
+  //function to add like
+  const [clickedPosts, setClickedPosts] = useState([]);
+
+  const handleClick = (postId) => {
+    setClickedPosts(prevClickedPosts => {
+      if (!prevClickedPosts.includes(postId)) {
+        return [...prevClickedPosts, postId];
+      } else {
+        return prevClickedPosts.filter(id => id !== postId);
+      }
+    });
+  };
+
+
+
+  //function to add comment
+  const handleAdd = async (id) => {
+    // e.preventDefault();
+    const token = localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    const updatedBody = {
+      user: localStorage.getItem('userId'),
+      post: id,
+      text: cmtText
+    };
+
+    const response = await addComments(id, updatedBody, headers);
+    console.log(response);
+    if (response.status === 201) {
+      toast.success('Comment added')
+      fetchWeatherPost()
+    } else {
+      alert('error in adding comment')
+    }
+  };
+
+  // const id=localStorage.getItem('userId')
+
+  //function to delete comment
+  const handleDelete = async (cmtId, postId) => {
+    console.log(cmtId);
+    console.log(postId);
+    const token = localStorage.getItem("token")
+    const headers = {
+      Authorization: `Bearer ${token}`
+    }
+    try {
+      const response = await deleteComments(cmtId, postId, headers)
+      console.log(response);
+      if (response.status === 204) {
+        alert('comment deleted')
+        fetchWeatherPost()
+      } else {
+        alert('Comment not deleted')
+      }
+
+
+    } catch (error) {
+      alert('error')
+    }
+  }
 
 
   return (
@@ -89,10 +158,15 @@ function AllPost() {
                     </MDBCardText>
                     <div className='bottom-content d-flex justify-content-between '>
                       <div className="action-item">
-                        <span><FaHeart className='text-danger' /> {data.likes}  Like</span>
+                        <span>
+                          <FaHeart 
+                            onClick={() => handleClick(data.id)}
+                            style={{ color: clickedPosts.includes(data.id) ? 'red' : 'inherit', fontSize:"20px" }}
+                          />
+                        </span>
                       </div>
                       <div className="action-item">
-                        <span onClick={addComment}><FaCommentAlt />  comments</span>
+                        <span style={{ cursor: 'pointer' }} onClick={addComment}><FaCommentAlt /> {data.comments.length} comments</span>
                       </div>
                     </div>
                     <div>
@@ -104,21 +178,38 @@ function AllPost() {
                           <Card className='mt-5'>
                             <Card.Body>
                               <Card.Title>Comments</Card.Title>
-                              <Card.Text>
-                                {/* comment enter field */}
-                                <input type="text" className='input-box' placeholder='Enter your comments here..' />
+                              <form  >
+                                <Card.Text>
+                                  {/* comment enter field */}
+                                  <input onChange={(e) => setText(e.target.value)} type="text" className='input-box' placeholder='Enter your comments here..' />
 
-                              </Card.Text>
-                              {/* button for comments add  */}
+                                </Card.Text>
+                                {/* button for comments add  */}
 
-                              <Button variant="Success">Add comment</Button>
-
+                                <Button onClick={(e) => handleAdd(data.id)} variant="Success">Add comment</Button>
+                              </form>
                               {/* button for comments delete */}
-                              <Button variant="Success" className='ms-3'>Delete comment</Button>
+                              {/* <Button variant="Success" className='ms-3'>Delete comment</Button> */}
 
                               {/* display comments loaded from server */}
                               <div className='input-box mt-5 '>
-                                <p>{data.comments}</p>
+                                {/* User comment */}
+                                {data.comment && (
+                                  <div className="user-comment">
+                                    <p>{data.comment.user}: {data.comment.text}</p>
+                                  </div>
+                                )}
+                                {/* Other comments */}
+                                {data.comments && data.comments.map((comment, index) => (
+                                  <div key={index} className="other-comments">
+                                    <p>{comment.user}: {comment.text}
+                                      <div className='trash'>
+                                        {/* <span style={{cursor:'pointer'}}> <FaTrashCan onClick={(e)=>handleDelete(comment.id,data.id)}   className='text-danger' /></span> */}
+                                      </div>
+                                    </p>
+
+                                  </div>
+                                ))}
 
                               </div>
                             </Card.Body>
@@ -139,6 +230,7 @@ function AllPost() {
 
           <div className="col-2"></div>
         </div>
+        <ToastContainer position='top-center' />
 
       </div>
       <Footer />

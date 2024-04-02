@@ -46,3 +46,9 @@
 .new-box{
     height: 90vh;
 }
+.userPosts:hover{
+    transition: .5s;
+
+    box-shadow: 2px px 1px 1px black;
+    transform: scale(1.1);
+}

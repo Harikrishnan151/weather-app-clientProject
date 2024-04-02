@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { TextField } from '@mui/material';
-
+import Swal from 'sweetalert2'
 const style = {
   position: 'absolute'  ,
   top: '50%',
@@ -88,16 +88,20 @@ const handleSubmit=async(e)=>{
         localStorage.setItem("token",response.data.access) 
         localStorage.setItem("userId",response.data.user.id)
         setLoggedIn(true);
-        toast.success('Login Successful')
+        Swal.fire("Logged in","You have successfully logged in","success")
+
+        // toast.success('Login Successful')
       //  setAuthorised(true)
       setTimeout(()=>{
         
         navigate('/home');
-      },3000)
+      },4000)
  
        }else if(response.response.status===401){
-        toast.error('invalid usernane or password')
+        // toast.error('invalid usernane or password')
+        Swal.fire("Error","Invalid Username or Password","error")
        }else{
+
         toast.error('Account does not exist')
        }
       

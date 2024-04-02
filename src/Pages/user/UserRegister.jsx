@@ -8,6 +8,8 @@ import { userReg } from '../../services/allApi';
 import { MdEmail } from "react-icons/md";
 import { IoPersonCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+
 function UserRegister() {
 
   
@@ -30,12 +32,16 @@ function UserRegister() {
       console.log(response.status);
   
       if (response.status === 201) {
-        toast.success("Registration Successful");
+        // toast.success("Registration Successful");
+        Swal.fire(" Account Registeration","You have  Registeration successful ","success")
+
         setTimeout(() => {
           navigate('/userLogin');
-        }, 3000);
+        }, 5000);
       } else if (response.response.status === 400) {
-        toast.error("Account already exists");
+        // toast.error("Account already exists");
+        Swal.fire("Error","Account already exists","error")
+
       } else {
         toast.error("Internal error");
       }

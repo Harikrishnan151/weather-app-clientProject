@@ -131,6 +131,16 @@ export const getComments=async(id)=>{
     return commonRequest('GET',`${BASE_URL}posts/${id}/comments/`)
 }
 
+//Api to delete comments
+export const deleteComments=async(cmtId,id,headers)=>{
+    return commonRequest('DELETE',`${BASE_URL}posts/${id}/comment/${cmtId}/`,"",headers)
+}
+
+//Api to add comment
+export const addComments=async(id,body,header)=>{
+  return commonRequest('POST',`${BASE_URL}posts/${id}/comment/`,body,header)
+}
+
 export const getSingleEmergency=async(id,header)=>{
     return commonRequest("GET",`${BASE_URL}emergencies/${id}/`,"",header)
 }

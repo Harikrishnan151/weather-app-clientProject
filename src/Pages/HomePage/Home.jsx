@@ -62,7 +62,7 @@ function Home() {
           <div className='search-box'>
             <FaLocationDot className='icons' />
             <input type="text" placeholder='Enter Location' onChange={(e) => setGivenLocation(e.target.value)} />
-            <button onClick={handleSubmit} ><FaSearchLocation /></button>
+            <button className='searchbtn' onClick={handleSubmit} ><FaSearchLocation /></button>
           </div>
 
           <div>
@@ -95,7 +95,7 @@ function Home() {
 
                               </div>
                             </div>
-                            <div className='text-center my-2 '>
+                            <div className='text-center my-3 '>
                               <Link to={'/Forecaste'}> <button className='btn btn-primary'>Live Forecast</button> </Link>
                             </div>
 
@@ -110,9 +110,9 @@ function Home() {
                 </div>
                 :
                 <div className='weather-box'>
-                   <img width={40} src="https://cdn-icons-png.flaticon.com/512/1779/1779882.png" alt="" />
+                   <img  src="https://cdn-icons-png.flaticon.com/256/1163/1163711.png" alt="" />
                   <div>
-                    <h5 className='content'>Introducing our weather app, your ultimate companion for both emergencies and daily forecasts. Stay ahead with real-time updates, detailed hourly forecasts.</h5>
+                    <h5 className='content mt-5'>Introducing our weather app, your ultimate companion for both emergencies and daily forecasts. Stay ahead with real-time updates, detailed hourly forecasts.</h5>
                   </div>
                   <div className='text-center my-5 '>
                     <Link to={'/Forecaste'}> <button className='btn btn-primary'>Live Forecast</button> </Link>

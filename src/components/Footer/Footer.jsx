@@ -12,7 +12,7 @@ import {
 function Footer() {
   return (
     <div>
-          <MDBFooter className='footer text-center text-white' >
+ <MDBFooter className='text-center text-white' style={{ backgroundColor: '#0597f2' }}>
       <MDBContainer className='pt-4'>
         <section className='mb-4'>
           <MDBBtn
@@ -20,35 +20,11 @@ function Footer() {
             color='link'
             floating
             size="lg"
-            className='text-light m-1'
+            className='text-dark m-1'
             href='#!'
             role='button'
           >
-            <MDBIcon style={{color:'white'}} fab className='fab fa-facebook-f' />
-          </MDBBtn>
-
-          <MDBBtn
-            rippleColor="dark"
-            color='link'
-            floating
-            size="lg"
-            className='text-light m-1'
-            href='#!'
-            role='button'
-          >
-            <MDBIcon style={{color:'white'}} fab className='fa-twitter' />
-          </MDBBtn>
-
-          <MDBBtn
-            rippleColor="dark"
-            color='link'
-            floating
-            size="lg"
-            className='text-light m-1'
-            href='#!'
-            role='button'
-          >
-            <MDBIcon style={{color:'white'}} fab className='fa-google' />
+            <MDBIcon fab className='fab fa-facebook-f' />
           </MDBBtn>
 
           <MDBBtn
@@ -60,7 +36,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon style={{color:'white'}} fab className='fa-instagram' />
+            <MDBIcon fab className='fa-twitter' />
           </MDBBtn>
 
           <MDBBtn
@@ -72,7 +48,7 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon style={{color:'white'}} fab className='fa-linkedin' />
+            <MDBIcon fab className='fa-google' />
           </MDBBtn>
 
           <MDBBtn
@@ -84,15 +60,39 @@ function Footer() {
             href='#!'
             role='button'
           >
-            <MDBIcon style={{color:'white'}} fab className='fa-github' />
+            <MDBIcon fab className='fa-instagram' />
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-linkedin' />
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-github' />
           </MDBBtn>
         </section>
       </MDBContainer>
 
       <div className='text-center text-light p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2024 Copyright:
+        © 2020 Copyright:
         <a className='text-light' href='https://mdbootstrap.com/'>
-          weather-app.com
+          MDBootstrap.com
         </a>
       </div>
     </MDBFooter>

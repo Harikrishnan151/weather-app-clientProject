@@ -81,7 +81,7 @@
 }
 
 .weather-box img{
-    width: 60%;
+    width: 40%;
 
 }
 
@@ -148,4 +148,8 @@
 }
 .content{
     text-align: justify;
+}
+
+.searchbtn :hover{
+    color: #3b82f6;
 }

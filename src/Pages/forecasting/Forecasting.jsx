@@ -78,13 +78,11 @@ function Forecasting() {
 
   const [oneHour,setOnehour]=useState([])
   const [hourly,setHourly]=useState([])
-  const [onday,setOnday]=useState({
-
-  })
+  const [onday,setOnday]=useState([])
   const [fiveday,setFiveday]=useState([])
  
 
-  //Api call to get 1 hour forecast
+  //1 Api call to get 1 hour forecast
   const fetchOnehour=async()=>{
     try {
       const response=await onehourForecast()
@@ -96,7 +94,7 @@ function Forecasting() {
   }
   console.log(oneHour);
 
-  //Api call to get hourly forecast
+  //2 Api call to get hourly forecast
   const fetchHourlyforecast=async()=>{
    try {
     const result=await hourlyForecast()
@@ -108,19 +106,19 @@ function Forecasting() {
   } 
   console.log(hourly);
 
-  //Api call to fetch oneday weather forecast
+  //3 Api call to fetch oneday weather forecast
   const fetchOnedayforecast=async()=>{
     try {
-      const data=await onedayWeatherForecast()
-      console.log(data.data);
-      setOnday(data)
+      const datas=await onedayWeatherForecast()
+      console.log(datas.data);
+      setOnday(datas.data)
     } catch (error) {
       alert('faild to fetch one day weather forecast')
     }
   }
   console.log(onday);
 
-  //Api call to fetch five day weather forecast
+  //4Api call to fetch five day weather forecast
   const fetchFivedayforecast=async()=>{
   try {
     const weatherData=await fivedayForecast()
@@ -130,6 +128,7 @@ function Forecasting() {
   } catch (error) {
     alert('faild to fetch five day weather forecast')
   }
+  console.log(fiveday);
 
   }
   console.log(fiveday);
@@ -160,10 +159,10 @@ function Forecasting() {
             <StyledTableCell>Date & Time</StyledTableCell>
             <StyledTableCell align="right">Time</StyledTableCell>
             <StyledTableCell align="right">Tempature</StyledTableCell>
-            <StyledTableCell align="right">Weather</StyledTableCell>
+            <StyledTableCell className='px-5' align="right">Weather</StyledTableCell>
             <StyledTableCell align="right">IsDaylight</StyledTableCell>
-            <StyledTableCell align="right">HasPrecipitation</StyledTableCell>
-            <StyledTableCell align="right">Precipitation-Probability</StyledTableCell>
+            <StyledTableCell align="right">Precipitation</StyledTableCell>
+            <StyledTableCell align="right">Rain-Probability</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -173,12 +172,12 @@ function Forecasting() {
               <StyledTableCell component="th" scope="row">
                 {onehourWeather.DateTime.slice(8,10)}-{onehourWeather.DateTime.slice(5,8)}{onehourWeather.DateTime.slice(0,4)}
               </StyledTableCell>
-              <StyledTableCell align="right"> {onehourWeather.DateTime.slice(11)}</StyledTableCell>
+              <StyledTableCell align="right"> {onehourWeather.DateTime.slice(11,19)}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.Temperature.Value} {onehourWeather.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right"> {onehourWeather.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.IsDaylight.toString()}</StyledTableCell>
               <StyledTableCell align="right">{onehourWeather.HasPrecipitation.toString()}</StyledTableCell>
-              <StyledTableCell align="right">{onehourWeather. PrecipitationProbability}</StyledTableCell>
+              <StyledTableCell className='px-5' align="right">{onehourWeather.PrecipitationProbability}</StyledTableCell>
             </StyledTableRow>
           )): <div >
             <h5 className='my-2'>Api Key expired</h5>
@@ -197,9 +196,9 @@ function Forecasting() {
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell align="right">Time</StyledTableCell>
             <StyledTableCell align="right">Tempature</StyledTableCell>
-            <StyledTableCell align="right">IsDaylight</StyledTableCell>
-            <StyledTableCell align="right">HasPrecipitation</StyledTableCell>
-            <StyledTableCell align="right">Precipitation-Probability</StyledTableCell>
+            <StyledTableCell align="right">Weather</StyledTableCell>
+            <StyledTableCell align="right">Precipitation</StyledTableCell>
+            <StyledTableCell align="right">Rain-Probability</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -210,12 +209,12 @@ function Forecasting() {
 
                 {hourlyData.DateTime.slice(8,10)}-{hourlyData.DateTime.slice(5,8)}{hourlyData.DateTime.slice(0,4)}
               </StyledTableCell>
-              <StyledTableCell align="right"> {hourlyData.DateTime.slice(11)}</StyledTableCell>
+              <StyledTableCell align="right"> {hourlyData.DateTime.slice(11,19)}</StyledTableCell>
 
               <StyledTableCell align="right">{hourlyData.Temperature.Value} {hourlyData.Temperature.Unit }</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.IconPhrase}</StyledTableCell>
               <StyledTableCell align="right">{hourlyData.HasPrecipitation.toString()}</StyledTableCell>
-              <StyledTableCell align="right">{hourlyData.PrecipitationProbability}</StyledTableCell>
+              <StyledTableCell className='px-5' align="right">{hourlyData.PrecipitationProbability}</StyledTableCell>
             </StyledTableRow>
           )):<div>
             <h5 className='my-2'>Api key expired</h5>
@@ -231,29 +230,37 @@ function Forecasting() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date & Time</StyledTableCell>
-            <StyledTableCell align="right">Tempature</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Date</StyledTableCell>
+            <StyledTableCell className='px-5' align="right">Weather</StyledTableCell>
+            <StyledTableCell align="right">Tempature Max</StyledTableCell>
+            <StyledTableCell align="right">Tempature Min</StyledTableCell>
+            <StyledTableCell className='px-2' align="right">Day</StyledTableCell>
+            <StyledTableCell className='px-5' align="right">Night</StyledTableCell>
+            <StyledTableCell align="right">Precipitation</StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {
-          onday?onday.map((onedayWeather) => (
-            <StyledTableRow >
-              <StyledTableCell component="th" scope="row">
-                {onedayWeather.Date}
-              </StyledTableCell>
-              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
-              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
-              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
-              <StyledTableCell align="right">{onedayWeather}</StyledTableCell>
-            </StyledTableRow>
-          )):<div>
-          <h5 className='my-2'>Api key expired</h5>
-        </div>
-          } */}
+        {
+  onday && onday.DailyForecasts && onday.DailyForecasts.length > 0 ? (
+    <StyledTableRow>
+      <StyledTableCell component="th" scope="row">
+      {onday.DailyForecasts[0].Date.slice(8, 10)}-{onday.DailyForecasts[0].Date.slice(5, 7)}-{onday.DailyForecasts[0].Date.slice(0, 4)}
+      </StyledTableCell>
+      <StyledTableCell align="right"> {onday.Headline.Text}</StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{onday.DailyForecasts[0].Temperature.Minimum.Value} F</StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{onday.DailyForecasts[0].Temperature.Maximum.Value} F</StyledTableCell>
+      <StyledTableCell align="right">{onday.DailyForecasts[0].Day.IconPhrase}</StyledTableCell>
+      <StyledTableCell align="right">{onday.DailyForecasts[0].Night.IconPhrase}</StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{onday.DailyForecasts[0].Day.HasPrecipitation ? "Yes" : "No"}</StyledTableCell>
+    </StyledTableRow>
+  ) : (
+    <div>
+      <h5 className='my-2'>Api key expired</h5>
+    </div>
+  )
+}
+
         </TableBody>
       </Table>
     </TableContainer>
@@ -264,29 +271,36 @@ function Forecasting() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Date & Time</StyledTableCell>
-            <StyledTableCell align="right">Tempature</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Date </StyledTableCell>
+            <StyledTableCell align="right">Tempature Min</StyledTableCell>
+            <StyledTableCell align="right">Temperature Max</StyledTableCell>
+            <StyledTableCell className='px-5' align="right">Day</StyledTableCell>
+            <StyledTableCell className='px-5' align="right">Night</StyledTableCell>
+            <StyledTableCell align="right">Precipitation</StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {
-          fiveday?fiveday.map((fivedayWeather) => (
-            <StyledTableRow >
-              <StyledTableCell component="th" scope="row">
-                {fivedayWeather.date}
-              </StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-              <StyledTableCell align="right">{}</StyledTableCell>
-            </StyledTableRow>
-          )):<div>
-          <h5 className='my-2'>Api key expired</h5>
-        </div>
-          }
+        {
+  fiveday ? Object.values(fiveday).map((fivedayWeather) => (
+    <StyledTableRow key={fivedayWeather.Date}>
+      <StyledTableCell component="th" scope="row">
+      {fivedayWeather.Date.slice(8, 10)}-{fivedayWeather.Date.slice(5, 7)}-{fivedayWeather.Date.slice(0, 4)}
+      </StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{fivedayWeather.Temperature.Minimum.Value} F</StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{fivedayWeather.Temperature.Maximum.Value} F</StyledTableCell>
+      <StyledTableCell align="right">{fivedayWeather.Day.IconPhrase}</StyledTableCell>
+      <StyledTableCell align="right">{fivedayWeather.Night.IconPhrase}</StyledTableCell>
+      <StyledTableCell className='px-5' align="right">{fivedayWeather.Day.HasPrecipitation ? "Yes" : "No"}</StyledTableCell>
+
+
+    </StyledTableRow>
+  )) : (
+    <div>
+      <h5 className='my-2'>Api key expired</h5>
+    </div>
+  )
+}
         </TableBody>
       </Table>
     </TableContainer>

@@ -104,7 +104,7 @@ function DashboardUser() {
   //function to logout user
   const logoutUser = () => {
     localStorage.clear();
-    toast.success('Logging out')
+    toast.success('You have been logged out successfully')
     setTimeout(() => {
       navigate('/')
     }, 3000)
@@ -217,7 +217,7 @@ function DashboardUser() {
               <Col sm={12} md={6} lg={4} xl={3} className='py-4 '>
 
                 <Link to={`/userPost/${postData.id}`} style={{ textDecoration: 'none' }}>
-                  <MDBCard className='card mt-5'>
+                  <MDBCard className='userPosts my-5'>
                     <MDBCardImage className='postImg' height={'200px'} src={`${BASE_URL}${postData.image}`} position='top' alt='...' />
                     <MDBCardBody>
                       <MDBCardTitle className='text-dark'>{postData.title}</MDBCardTitle>
@@ -227,15 +227,15 @@ function DashboardUser() {
                       </MDBCardText>
                       <div className='bottom-content d-flex justify-content-between '>
                         <div className="action-item">
-                          <span><FaHeart className='text-danger' /> {postData.likes} Likes</span>
+                          <span><FaHeart className='text-danger' /> </span>
                         </div>
                         <div className="action-item">
                           <span><FaCommentAlt /> {postData.comments.length} comments</span>
                           <div>
-                          {postData.comments && postData.comments.map((comment, index) => (
+                          {/* {postData.comments && postData.comments.map((comment, index) => (
                              <p key={index}>{comment.text}</p>
                              
-                         ))}
+                         ))} */}
                           </div>
                         </div>
                       </div>

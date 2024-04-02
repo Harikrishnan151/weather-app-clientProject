@@ -14,8 +14,9 @@ import { FaCommentAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import BASE_URL from '../../services/baseurl';
 import { Button } from 'react-bootstrap';
-import { getComments, viewUserPost } from '../../services/allApi';
+import { addComments, deleteComments, getComments, viewUserPost } from '../../services/allApi';
 import { useParams } from 'react-router-dom';
+import { FaTrashCan } from "react-icons/fa6";
 
 
 function UserPost() {
@@ -26,6 +27,14 @@ function UserPost() {
     const [data, setData] = useState([])
     const [comments, setComments] = useState([])
     const [addvalue, setComment] = useState(false)
+
+    const [body, setBody] = useState({
+        user: '',
+        post: '',
+        text: ''
+    })
+
+    const [cmtText, setText] = useState()
     //Add comment toggle comment box display using comment link clicks
     const addComment = () => {
         console.log("add comment");
@@ -59,15 +68,71 @@ function UserPost() {
     }, [])
 
     //function to get comment
-    const comment= async() => {
-     try {
-        const result = await getComments(id)
-        console.log(result)
-        setComments(result)
-     } catch (error) {
-        alert(error)
-     }
+    const comment = async () => {
+        try {
+            const result = await getComments(id)
+            console.log(result)
+            setComments(result.data)
+        } catch (error) {
+            alert(error)
+        }
     }
+
+    //function to delete comment
+    const handleDelete = async (cmtId) => {
+        console.log(cmtId);
+        console.log(id);
+        const token = localStorage.getItem("token")
+        const headers = {
+            Authorization: `Bearer ${token}`
+        }
+        try {
+            const response = await deleteComments(cmtId, id, headers)
+            console.log(response);
+            alert('comment deleted')
+            fetchUserPost()
+        } catch (error) {
+            alert('error')
+        }
+    }
+
+    //function to add comment
+    const handleAdd = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        const headers = {
+            Authorization: `Bearer ${token}`
+        };
+
+        const updatedBody = {
+            user: localStorage.getItem('userId'),
+            post: id,
+            text: cmtText
+        };
+
+        const response = await addComments(id, updatedBody, headers);
+        console.log(response);
+        if (response.status === 201) {
+            alert('Comment added')
+            fetchUserPost()
+        } else {
+            alert('error in adding comment')
+        }
+    };
+
+      //function to add like
+  const [clickedPosts, setClickedPosts] = useState([]);
+
+  const handleClick = (postId) => {
+    setClickedPosts(prevClickedPosts => {
+      if (!prevClickedPosts.includes(postId)) {
+        return [...prevClickedPosts, postId];
+      } else {
+        return prevClickedPosts.filter(id => id !== postId);
+      }
+    });
+  };
+
     return (
         <>
             <Navbar />
@@ -80,7 +145,7 @@ function UserPost() {
 
                             <MDBCard className='card my-5'>
                                 {/* <MDBCardTitle className='text-dark mt-1 mx-2'><img style={{ width: '1.5rem', height: '1.3rem;', overflow: 'hidden' }} src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="" /> {}</MDBCardTitle> */}
-                                <MDBCardText className='mx-2' >
+                                <MDBCardText className='mx-2 mt-2' >
 
                                     <FaLocationDot /> {data.location}
 
@@ -99,10 +164,15 @@ function UserPost() {
                                     </MDBCardText>
                                     <div className='bottom-content d-flex justify-content-between '>
                                         <div className="action-item">
-                                            <span><FaHeart className='text-danger' />   Like</span>
+                                            <span>
+                                                <FaHeart 
+                                                    onClick={() => handleClick(data.id)}
+                                                    style={{ color: clickedPosts.includes(data.id) ? 'red' : 'inherit', fontSize: "20px",cursor: 'pointer' }}
+                                                />
+                                            </span>
                                         </div>
                                         <div className="action-item">
-                                            <span onClick={addComment}><FaCommentAlt />  comments</span>
+                                            <span style={{ cursor: 'pointer' }} onClick={addComment}><FaCommentAlt /> {comments.length}  comments</span>
                                         </div>
                                     </div>
                                     <div>
@@ -114,21 +184,42 @@ function UserPost() {
                                                 <Card className='mt-5'>
                                                     <Card.Body>
                                                         <Card.Title>Comments</Card.Title>
-                                                        <Card.Text>
-                                                            {/* comment enter field */}
-                                                            <input type="text" className='input-box' placeholder='Enter your comments here..' />
+                                                        <form onSubmit={(e) => handleAdd(e)} >
+                                                            <Card.Text>
 
-                                                        </Card.Text>
-                                                        {/* button for comments add  */}
+                                                                {/* comment enter field */}
+                                                                <input type="text" onChange={(e) => setText(e.target.value)} className='input-box' placeholder='Enter your comments here..' />
 
-                                                        <Button variant="Success">Add comment</Button>
+                                                            </Card.Text>
+                                                            {/* button for comments add  */}
 
+                                                            <Button type='submit' variant="Success">Add comment</Button>
+                                                        </form>
                                                         {/* button for comments delete */}
-                                                        <Button variant="Success" className='ms-3'>Delete comment</Button>
+                                                        {/* <Button variant="Success" className='ms-3'>Delete comment</Button> */}
 
                                                         {/* display comments loaded from server */}
                                                         <div className='input-box mt-5 '>
-                                                            <p>{ }</p>
+                                                            {data.comment && (
+                                                                <div className="user-comment">
+                                                                    {/* <p>{data.comment.user}: {data.comment.text}</p> */}
+                                                                    {/* <div className='trash'>
+                                                                 <span> <FaTrashCan onClick={()=>handleDelete(data.comment.id)}  className='text-danger' /></span>
+                                                                 </div> */}
+                                                                </div>
+
+                                                            )}
+                                                            {/* Other comments */}
+                                                            {data.comments && data.comments.map((comment, index) => (
+                                                                <div key={index} className="other-comments">
+                                                                    <p>{comment.user}: {comment.text}
+                                                                        <div>
+                                                                            <span className='trash' style={{ cursor: 'pointer' }}> <FaTrashCan onClick={(e) => handleDelete(comment.id)} className='text-danger' /></span>
+                                                                        </div>
+                                                                    </p>
+
+                                                                </div>
+                                                            ))}
 
                                                         </div>
                                                     </Card.Body>

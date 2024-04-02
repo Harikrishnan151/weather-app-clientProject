@@ -7,6 +7,7 @@
     min-height: 100vh;
     background: linear-gradient(to bottom right, #0597f2, #3b82f6);
 
+
     /* background: url('https://images.hdqwalls.com/download/stars-planets-4k-b1-1920x1080.jpg'); */
     background-size: cover;
     background-position: center;
@@ -85,7 +86,7 @@
 }
 
 .weather-box img {
-    width: 60%;
+    width: 40%;
 
 }
 
@@ -172,4 +173,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 30px;
+}
+.searchbtn :hover{
+    color: #3b82f6;
 }
