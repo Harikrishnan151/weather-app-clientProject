@@ -2,8 +2,16 @@
     background-color: rgb(215, 220, 220);
   
 }
-.trash{
+/* .trash{
+   display: inline;
+   justify-content: end;
+     
+} */
+/* .other-comments{
+    display: inline;
+    justify-content: space-between;
+} */
+.items{
     display: flex;
-    justify-content: end;
-    
+    justify-content: space-between;
 }

@@ -109,8 +109,8 @@ useEffect(()=>{
         </Typography>
       </CardContent>
       <CardActions>
-    <div style={{display:'flex',justifyContent:'space-around'}}>
-    <Link to={`/EmergencySingleView/${i.id}`}><Button className='mx-5' size="small">Edit</Button></Link>
+    <div style={{display:'flex'}}>
+    <Link to={`/EmergencySingleView/${i.id}`}><Button className='mx-4' size="small">Edit</Button></Link>
         <Button className='text-danger mx-5' onClick={()=>DeleteEmergency(i.id)} size="small">Delete</Button>
     </div>
       </CardActions>

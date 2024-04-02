@@ -21,8 +21,9 @@ function Footer() {
             floating
             size="lg"
             className='text-dark m-1'
-            href='#!'
+            href='https://www.facebook.com/'
             role='button'
+            target='_blank'
           >
             <MDBIcon fab className='fab fa-facebook-f' />
           </MDBBtn>
@@ -33,8 +34,9 @@ function Footer() {
             floating
             size="lg"
             className='text-dark m-1'
-            href='#!'
+            href='https://twitter.com/?lang=en-in'
             role='button'
+            target='_blank'
           >
             <MDBIcon fab className='fa-twitter' />
           </MDBBtn>
@@ -45,8 +47,9 @@ function Footer() {
             floating
             size="lg"
             className='text-dark m-1'
-            href='#!'
+            href='https://www.google.co.in/'
             role='button'
+            target='_blank'
           >
             <MDBIcon fab className='fa-google' />
           </MDBBtn>
@@ -57,8 +60,9 @@ function Footer() {
             floating
             size="lg"
             className='text-dark m-1'
-            href='#!'
+            href='https://www.instagram.com/'
             role='button'
+            target='_blank'
           >
             <MDBIcon fab className='fa-instagram' />
           </MDBBtn>
@@ -69,13 +73,15 @@ function Footer() {
             floating
             size="lg"
             className='text-dark m-1'
-            href='#!'
+            href='https://www.linkedin.com'
             role='button'
-          >
+            target='_blank'
+          > 
+
             <MDBIcon fab className='fa-linkedin' />
           </MDBBtn>
 
-          <MDBBtn
+          {/* <MDBBtn
             rippleColor="dark"
             color='link'
             floating
@@ -85,14 +91,14 @@ function Footer() {
             role='button'
           >
             <MDBIcon fab className='fa-github' />
-          </MDBBtn>
+          </MDBBtn> */}
         </section>
       </MDBContainer>
 
       <div className='text-center text-light p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2020 Copyright:
+        © 2024 Copyright:
         <a className='text-light' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+          weatherapp.com
         </a>
       </div>
     </MDBFooter>

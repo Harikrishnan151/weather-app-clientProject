@@ -104,7 +104,7 @@ function DashboardUser() {
   //function to logout user
   const logoutUser = () => {
     localStorage.clear();
-    toast.success('You have been logged out successfully')
+    toast.success('Succesfully Logged out')
     setTimeout(() => {
       navigate('/')
     }, 3000)

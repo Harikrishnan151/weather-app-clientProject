@@ -41,7 +41,7 @@ console.log(emergency)
          emergency.map((item)=>(
           <Col sm={12} md={6} lg={4} xl={3} className='py-4'>
 
-        <Link to={`view/`} style={{ textDecoration: 'none' }}>
+        
           <MDBCard style={{height:'370px'}} className='card '>
             <MDBCardImage height={'200px'} src={`${BASE_URL}${item.image}`} position='top' alt='...' />
             <MDBCardBody>
@@ -54,7 +54,7 @@ console.log(emergency)
 
             </MDBCardBody>
           </MDBCard>
-        </Link>
+       
       </Col>
          ))
       }

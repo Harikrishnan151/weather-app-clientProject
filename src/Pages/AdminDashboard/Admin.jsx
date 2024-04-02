@@ -7,6 +7,8 @@ import EmergencyView from '../AdminEmergency/EmergencyView';
 import EmergencyAdd from '../AdminEmergency/EmergencyAdd';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import { IoMdLogOut } from "react-icons/io";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 import {
   MDBContainer,
@@ -59,7 +61,7 @@ function Admin({children}) {
   //logout
   const logout =()=>{
     localStorage.clear()
-    alert(" loging out")
+    alert(" logged out successfully")
    navigate('/')
   }
 
@@ -67,7 +69,7 @@ function Admin({children}) {
   const invalidLogin=()=>{
     const token=localStorage.getItem('token')
     if(!token){
-      alert("please Login first")
+      alert("Please Login first")
       navigate('/')
     }
     
@@ -123,11 +125,11 @@ function Admin({children}) {
         </a>
       
       <a href="" onClick={(e)=>Emergencyadd(e)} className='item'>
-      <BiHome className='icon' />
+      <IoMdAddCircleOutline className='icon' />
       Emergency Add
       </a>
       <a href="" onClick={()=>logout()}  className='item'>
-      <BiHome className='icon' />
+      <IoMdLogOut  className='icon' />
       Logout
       </a>
      

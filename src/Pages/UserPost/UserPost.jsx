@@ -120,18 +120,18 @@ function UserPost() {
         }
     };
 
-      //function to add like
-  const [clickedPosts, setClickedPosts] = useState([]);
+    //function to add like
+    const [clickedPosts, setClickedPosts] = useState([]);
 
-  const handleClick = (postId) => {
-    setClickedPosts(prevClickedPosts => {
-      if (!prevClickedPosts.includes(postId)) {
-        return [...prevClickedPosts, postId];
-      } else {
-        return prevClickedPosts.filter(id => id !== postId);
-      }
-    });
-  };
+    const handleClick = (postId) => {
+        setClickedPosts(prevClickedPosts => {
+            if (!prevClickedPosts.includes(postId)) {
+                return [...prevClickedPosts, postId];
+            } else {
+                return prevClickedPosts.filter(id => id !== postId);
+            }
+        });
+    };
 
     return (
         <>
@@ -165,9 +165,9 @@ function UserPost() {
                                     <div className='bottom-content d-flex justify-content-between '>
                                         <div className="action-item">
                                             <span>
-                                                <FaHeart 
+                                                <FaHeart
                                                     onClick={() => handleClick(data.id)}
-                                                    style={{ color: clickedPosts.includes(data.id) ? 'red' : 'inherit', fontSize: "20px",cursor: 'pointer' }}
+                                                    style={{ color: clickedPosts.includes(data.id) ? 'red' : 'inherit', fontSize: "20px", cursor: 'pointer' }}
                                                 />
                                             </span>
                                         </div>
@@ -212,11 +212,13 @@ function UserPost() {
                                                             {/* Other comments */}
                                                             {data.comments && data.comments.map((comment, index) => (
                                                                 <div key={index} className="other-comments">
-                                                                    <p>{comment.user}: {comment.text}
-                                                                        <div>
-                                                                            <span className='trash' style={{ cursor: 'pointer' }}> <FaTrashCan onClick={(e) => handleDelete(comment.id)} className='text-danger' /></span>
-                                                                        </div>
+                                                                    <div>
+                                                                    </div>
+                                                                    <p className='items p-3'><span><img style={{ width: '3rem', height: '3rem;', overflow: 'hidden' }} src="https://i.postimg.cc/GtpR2Y5z/istockphoto-1495088043-612x612-removebg-preview.png" alt="" /> {comment.user_username} : {comment.text} </span>
+                                                                    <span className='trash pt-2' style={{ cursor: 'pointer' }}> <FaTrashCan onClick={(e) => handleDelete(comment.id)} className='text-danger' /></span>
+
                                                                     </p>
+                                                                   
 
                                                                 </div>
                                                             ))}

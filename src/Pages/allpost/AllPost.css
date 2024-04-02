@@ -23,7 +23,11 @@
     align-items: center;
     justify-content: center;
 }
-.trash{
+/* .trash{
     display: flex;
     justify-content: end;
+} */
+.other-comments{
+    background-color: rgb(215, 220, 220);
+
 }

@@ -48,7 +48,7 @@ console.log(username);
 // try {
 
   const response = await resetPasswordUser(body)
-if(response.status==200){
+if(response.status===200){
   alert('New password send to registered mail')
   handleClose()
   setTimeout(()=>{
@@ -95,7 +95,7 @@ const handleSubmit=async(e)=>{
       setTimeout(()=>{
         
         navigate('/home');
-      },4000)
+      },3000)
  
        }else if(response.response.status===401){
         // toast.error('invalid usernane or password')

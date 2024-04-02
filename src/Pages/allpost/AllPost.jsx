@@ -202,11 +202,13 @@ function AllPost() {
                                 {/* Other comments */}
                                 {data.comments && data.comments.map((comment, index) => (
                                   <div key={index} className="other-comments">
-                                    <p>{comment.user}: {comment.text}
+                                    <p className='p-3'><img style={{ width: '3rem', height: '3rem;', overflow: 'hidden' }} src="https://i.postimg.cc/GtpR2Y5z/istockphoto-1495088043-612x612-removebg-preview.png" alt="" /> {comment.user_username} : {comment.text}
                                       <div className='trash'>
                                         {/* <span style={{cursor:'pointer'}}> <FaTrashCan onClick={(e)=>handleDelete(comment.id,data.id)}   className='text-danger' /></span> */}
                                       </div>
+                                        {/* <p className='px-3'> {comment.created_at.slice(8, 10)}-{comment.created_at.slice(5, 8)}{comment.created_at.slice(0,4)}</p> */}
                                     </p>
+                                    
 
                                   </div>
                                 ))}

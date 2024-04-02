@@ -37,7 +37,7 @@ function UserRegister() {
 
         setTimeout(() => {
           navigate('/userLogin');
-        }, 5000);
+        }, 3000);
       } else if (response.response.status === 400) {
         // toast.error("Account already exists");
         Swal.fire("Error","Account already exists","error")
